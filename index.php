@@ -1,20 +1,21 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$bbdd = "zapatilleate";
-$port = 3308;
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $bbdd = "zapatilleate";
+    $port = 3308;
 
-// Conexion con la BBDD
-$conn = new mysqli($servername, $username, $password, $bbdd, $port);
+    // Conexion con la BBDD
+    $conn = new mysqli($servername, $username, $password, $bbdd, $port);
 
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-$sql = "SELECT * FROM `noticias` order by fecha DESC limit 5";
-$result = $conn->query($sql);
+    $sql = "SELECT * FROM `noticias` order by fecha DESC limit 5";
+    $result = $conn->query($sql);
 
+    $cookie_name = "user_name";
 ?>
 
 <!DOCTYPE html>
@@ -36,16 +37,16 @@ $result = $conn->query($sql);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/styles.css">
-    <link rel="stylesheet" type="text/css" href="./css/news.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/news.css">
     <title>Trabajo obligatorio - Zapatilleate</title>
 </head>
 
 <body>
     <!-- HEADER -->
     <header>
-        <a href="./index.html" class="div-header">
-            <img src="./img/header.jpg" alt="imagen zapatillas" id="header-img">
+        <a href="/zapatilleate/index.html" class="div-header">
+            <img src="/zapatilleate/img/header.jpg" alt="imagen zapatillas" id="header-img">
             <h1>Zapatilleate</h1>
         </a>
         <nav id="header-nav">
@@ -54,26 +55,56 @@ $result = $conn->query($sql);
                     <a href="index.php">Inicio</a>
                 </li>
                 <li>
-                    <a href="./views/productos.php">Productos</a>
+                    <a href="/zapatilleate/views/productos.php">Productos</a>
                 </li>
                 <li>
-                    <a href="./views/presupuestos.php">Regístrate</a>
+                    <?php
+                        if(!isset($_COOKIE[$cookie_name])) {
+                            echo "
+                                <a href='./views/presupuestos.php'>Presupuesto</a>
+                            ";
+                        } else {
+                            echo "
+                                <a href='./views/citas.php'>Citas</a>
+                            ";
+                        }
+                    ?>
                 </li>
                 <li>
-                    <a href="./views/contacto.php">Contacto</a>
+                    <a href="/zapatilleate/views/contacto.php">Contacto</a>
                 </li>
             </ul>
         </nav>
+        <?php
+            if(!isset($_COOKIE[$cookie_name])) {
+                echo "
+                <form id='login-form' class='login' onsubmit='return loginForm(this)'>
+                    <input type='text' id='usuario'>
+                    <input type='password' id='password'>
+                    <input type='submit' class='boton' id='login' value='Entrar'/>
+                </form>
+                ";
+            } else {
+                echo "
+                    <div class='loged'>
+                        ". $_COOKIE[$cookie_name]."
+                        <form onsubmit='return logoutForm(this)'>
+                        <input type='submit' class='boton' id='logout' value='Salir'/>
+                        </form>
+                    </div>
+                ";
+            }
+        ?>
     </header>
     <!--SECTION 1 -->
     <section class="section1">
         <h2 class="vida">EQUIPA TU ESTILO DE VIDA</h2>
         <h3 class="style-h3">Para deportistas</h3>
         <div class="img1">
-            <a href="./views/productos.html#deportistas"><img src="./img/deporte.jpg" alt="imagen zapatillas deporte"></a>
+            <a href="/zapatilleate/views/productos.html#deportistas"><img src="/zapatilleate/img/deporte.jpg" alt="imagen zapatillas deporte"></a>
         </div>
         <div class="img2">
-            <a href="./views/productos.html#deportistas"><img src="./img/deporte2.jpeg" alt="imagen zapatillas deporte"></a>
+            <a href="/zapatilleate/views/productos.html#deportistas"><img src="/zapatilleate/img/deporte2.jpeg" alt="imagen zapatillas deporte"></a>
         </div>
     </section>
     <div>
@@ -84,10 +115,10 @@ $result = $conn->query($sql);
     <section class="section1">
         <h3 class="style-h3">Para Aventureros</h3>
         <div class="img3">
-            <a href="./views/productos.html#aventureros"><img src="./img/montaña.jpg" alt="imagen zapatillas montaña"></a>
+            <a href="/zapatilleate/views/productos.html#aventureros"><img src="/zapatilleate/img/montaña.jpg" alt="imagen zapatillas montaña"></a>
         </div>
         <div class="img4">
-            <a href="./views/productos.html#aventureros"><img src="./img/montaña2.jpg" alt="imagen zapatillas montaña"></a>
+            <a href="/zapatilleate/views/productos.html#aventureros"><img src="/zapatilleate/img/montaña2.jpg" alt="imagen zapatillas montaña"></a>
         </div>
     </section>
     <div>
@@ -98,10 +129,10 @@ $result = $conn->query($sql);
     <section class="section1">
         <h3 class="style-h3">Para Fiesteros</h3>
         <div class="img5">
-            <a href="./views/productos.html#fiesteros"><img src="./img/vestir.jpg" alt="imagen zapatillas vestir"></a>
+            <a href="/zapatilleate/views/productos.html#fiesteros"><img src="/zapatilleate/img/vestir.jpg" alt="imagen zapatillas vestir"></a>
         </div>
         <div class="img6">
-            <a href="./views/productos.html#fiesteros"><img src="./img/vestir2.jpg" alt="imagen zapatillas vestir"></a>
+            <a href="/zapatilleate/views/productos.html#fiesteros"><img src="/zapatilleate/img/vestir2.jpg" alt="imagen zapatillas vestir"></a>
         </div>
     </section>
     <div>
@@ -141,11 +172,11 @@ $result = $conn->query($sql);
         <div class="p-footer">
             <p>Centro comercial Lagoh, Sevilla</p>
             <p>670809010</p>
-            <a href="./views/legal.html" class="p-legal">Aviso legal</a>
+            <a href="/zapatilleate/views/legal.html" class="p-legal">Aviso legal</a>
         </div>
         <div class="div-footer">
-            <img src="./img/insta-icon.png" class="footer-img" alt="instagram">
-            <img src="./img/face-icon.png" class="footer-img" alt="facebook">
+            <img src="/zapatilleate/img/insta-icon.png" class="footer-img" alt="instagram">
+            <img src="/zapatilleate/img/face-icon.png" class="footer-img" alt="facebook">
         </div>
     </footer>
     <!--Bootstrap JS -->
@@ -153,6 +184,8 @@ $result = $conn->query($sql);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/zapatilleate/js/validation.js"></script>
+    <script src="/zapatilleate/js/login.js"></script>
 </body>
 
 </html>
