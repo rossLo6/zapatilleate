@@ -1,0 +1,423 @@
+/*******************************************************/
+
+
+/*  GENERAL  */
+
+
+/*******************************************************/
+
+html {
+    background-color: var(--color-5);
+    font-family: Comic, Verdana, Tahoma, sans-serif;
+    --color-1: #cdb4db;
+    --color-2: #ffc8dd;
+    --color-3: #ffafcc;
+    --color-4: #bde0fe;
+    --color-5: #a2d2ff;
+}
+
+body {
+    padding: 0px 50px;
+    background-color: white;
+    margin-top: 1%;
+    margin-bottom: 10%;
+    border: 10px solid var(--color-5);
+    border-radius: 15px;
+    overflow: auto;
+    margin: 15px auto;
+}
+
+h1 {
+    font-family: 'Comforter Brush', cursive;
+    font-size: 59px;
+    color: black;
+    text-shadow: 2px 5px 4px var(--color-3);
+    margin-top: 6.3%;
+    margin-bottom: 15px;
+    font-weight: 600;
+    line-height: initial;
+}
+
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    color: black;
+    text-shadow: 2px 5px 4px var(--color-3);
+}
+
+
+/*******************************************************/
+
+
+/*  HEADER  */
+
+
+/*******************************************************/
+
+header {
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    position: sticky;
+    z-index: 99; 
+    background: white;
+}
+
+#header-img {
+    width: 150px;
+    float: left;
+    margin-right: 1%;
+}
+
+.div-header {
+    overflow: hidden;
+    float: left;
+    width: 360px;
+    box-sizing: initial;
+}
+
+
+/*******************************************************/
+
+
+/*  Lista navegacion CABECERA  */
+
+
+/*******************************************************/
+
+#header-nav {
+    overflow: hidden;
+    width: 540px;
+    padding-top: 28px;
+}
+
+#header-nav ul {
+    float: right;
+    display: block;
+    margin-top: 0%;
+    margin-right: 5%;
+}
+
+#header-nav ul li {
+    list-style: none;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: var(--color-1);
+    margin: 8px;
+    background-color: var(--color-3);
+}
+
+#header-nav ul li a,
+header a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    display: block;
+}
+
+#header-nav ul li.active {
+    background-color: var(--color-4);
+}
+
+#header-nav ul li.active a {
+    color: black;
+}
+
+
+/*******************************************************/
+
+
+/*  INICIO  */
+
+
+/*******************************************************/
+
+.vida {
+    font-size: 40px;
+    text-align: center;
+}
+
+.style-h3 {
+    font-size: 25px;
+    margin-left: 1%;
+    padding-top: 20px;
+}
+
+.section1 {
+    overflow: hidden;
+}
+
+.parrafo1 {
+    text-align: justify;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.img1 {
+    width: calc(50% - 30px);
+    height: 500px;
+    float: left;
+    margin: 20px 10px 20px 20px;
+}
+
+.img1 img {
+    width: 100%;
+    height: 100%;
+}
+
+.img2 {
+    width: calc(50% - 30px);
+    height: 500px;
+    float: left;
+    margin: 20px 20px 20px 10px;
+}
+
+.img2 img {
+    width: 100%;
+    height: 100%;
+}
+
+.img3 {
+    width: calc(50% - 30px);
+    height: 500px;
+    float: left;
+    margin: 20px 10px 20px 20px;
+}
+
+.img3 img {
+    width: 100%;
+    height: 100%;
+}
+
+.img4 {
+    width: calc(50% - 30px);
+    height: 500px;
+    float: left;
+    margin: 20px 20px 20px 10px;
+}
+
+.img4 img {
+    width: 100%;
+    height: 100%;
+}
+
+.img5 {
+    width: calc(50% - 30px);
+    height: 500px;
+    float: left;
+    margin: 20px 10px 20px 20px;
+}
+
+.img5 img {
+    width: 100%;
+    height: 100%;
+}
+
+.img6 {
+    width: calc(50% - 30px);
+    height: 500px;
+    float: left;
+    margin: 20px 20px 20px 10px;
+}
+
+.img6 img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*******************************************************/
+
+
+/*  GALLERY - presupuestos  */
+
+
+/*******************************************************/
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230d6efd'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230d6efd'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+}
+
+.carouselIMG {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.custom-item {
+    width: 31%;
+    float: left;
+    margin: 0 1%;
+}
+
+.custom-item img {
+    width: 100%;
+}
+
+.custom-item span {
+    font-size: 20px;
+    padding: 10px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-shadow: 10px 10px 1px var(--color-1);
+}
+
+.carousel-control-prev {
+    justify-content: flex-start;
+}
+
+.carousel-control-next {
+    justify-content: flex-end;
+}
+
+
+/*******************************************************/
+
+
+/*  FORM - presupuestos  */
+
+
+/*******************************************************/
+
+form {
+    padding-top: 60px;
+    border-radius: 10px;
+    opacity: 0.8;
+    background-color: var(--color-2);
+    overflow: hidden;
+    max-width: 1150px;
+    margin: 0 auto
+}
+
+.label {
+    font-size: large;
+    font-weight: bold;
+    float: left;
+    clear: left;
+    margin: 10px 0;
+    width: calc(30% - 20px);
+    text-align: right;
+    padding-right: 20px;
+}
+
+.cuadros {
+    background-color: var(--color-4);
+    float: left;
+    width: 60%;
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 10px;
+    border: 10px var(--color-3);
+}
+
+#elijeProducto {
+    background-color: var(--color-4);
+    width: 60%;
+    padding: 8px;
+    border-radius: 10px;
+    border: 10px var(--color-3);
+    margin: 10px 0;
+}
+
+#plazo,
+#selectPlazo {
+    background-color: var(--color-4);
+    width: 29%;
+    padding: 8px;
+    border-radius: 10px;
+    border: 10px var(--color-3);
+    margin-right: 20px;
+}
+
+.customcheck {
+    background-color: var(--color-4);
+    width: 8%;
+    margin: 25px 0;
+    padding: 8px;
+    border-radius: 10px;
+    border: 10px var(--color-3);
+}
+
+.boton {
+    margin-top: 33px;
+    margin-left: 74px;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: medium;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    padding: 8px;
+    width: 20%;
+    border: 10px var(--color-3);
+}
+
+.boton:hover {
+    background-color: var(--color-1);
+    cursor: pointer;
+}
+
+#check {
+    display: block;
+    float: left;
+    margin: 14px 0px;
+}
+
+#checkPolitica {
+    display: block;
+    float: left;
+    margin: 20px 0px;
+}
+
+
+/*******************************************************/
+
+
+/*  FOOTER  */
+
+
+/*******************************************************/
+
+footer {
+    font-size: 12px;
+    position: relative;
+    box-sizing: border-box;
+    clear: both;
+    color: black;
+    text-align: center;
+    padding: 30px;
+    background-color: var(--color-2);
+    margin: 60px -50px 0px -50px;
+    overflow: hidden;
+}
+
+.footer-img {
+    width: 10%;
+    float: right;
+    display: inline;
+}
+
+.p-footer {
+    width: calc(100% - 330px);
+    float: left;
+}
+
+.div-footer {
+    text-align: center;
+}
+
+.p-legal {
+    display: block;
+    margin-top: 81px;
+}
+
+footer p,
+footer a {
+    font-size: 15px;
+}
