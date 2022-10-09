@@ -74,7 +74,16 @@
                 <li>
                     <a href="/zapatilleate/views/contacto.php">Contacto</a>
                 </li>
-            </ul>
+                <?php
+                    if(isset($_COOKIE['user_rol']) && $_COOKIE['user_rol'] == 1) {
+                        echo "
+                        <li>
+                            <a href='./views/admin/index.php'>Admin</a>
+                        </li>
+                        ";
+                    }
+                ?>
+                </ul>
         </nav>
         <?php
             if(!isset($_COOKIE[$cookie_name])) {
@@ -89,8 +98,7 @@
                 echo "
                     <div class='loged'>
                         <form onsubmit='return logoutForm(this)'>
-                        ". $_COOKIE[$cookie_name]."
-                        <input type='submit' class='boton' id='logout' value='Salir'/>
+                            <input type='submit' class='boton' id='logout' value='Salir'/>
                         </form>
                     </div>
                 ";
