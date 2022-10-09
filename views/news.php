@@ -29,7 +29,7 @@ $new = $result->fetch_assoc()
     <meta name="revisit-after" content="2 days" />
     <meta name="category" content="Trabajo obligatorio" />
     <!-- Llamada icono-->
-    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/zapatilleate/favicon.ico" />
     <!-- Llamada googleFonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,8 +37,9 @@ $new = $result->fetch_assoc()
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Declaración de fichero de estilos -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <link rel="stylesheet" type="text/css" href="../css/news.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/news.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>
         <?php
         echo $new['titulo'];
@@ -48,26 +49,55 @@ $new = $result->fetch_assoc()
 
 <body>
     <header>
-        <a href="../index.php" class="div-header">
-            <img src="../img/header.jpg" alt="imagen zapatillas" id="header-img">
+        <a href="/zapatilleate/index.php" class="div-header">
+            <img src="/zapatilleate/img/header.jpg" alt="imagen zapatillas" id="header-img">
             <h1>Zapatilleate</h1>
         </a>
         <nav id="header-nav">
             <ul>
                 <li class="active">
-                    <a href="../index.php">Inicio</a>
+                    <a href="/zapatilleate/index.php">Inicio</a>
                 </li>
                 <li>
                     <a href="./productos.php">Productos</a>
                 </li>
                 <li>
-                    <a href="./presupuestos.php">Regístrate</a>
-                </li>
+                <?php
+                        if(!isset($_COOKIE[$cookie_name])) {
+                            echo "
+                                <a href='./views/presupuestos.php'>Presupuesto</a>
+                            ";
+                        } else {
+                            echo "
+                                <a href='./views/citas.php'>Citas</a>
+                            ";
+                        }
+                    ?>                </li>
                 <li>
                     <a href="./contacto.php">Contacto</a>
                 </li>
             </ul>
         </nav>
+        <?php
+            if(!isset($_COOKIE["user_id"])) {
+                echo "
+                <form id='login-form' class='login' onsubmit='return loginForm(this)'>
+                    <input type='text' id='usuario'>
+                    <input type='password' id='password'>
+                    <input type='submit' class='boton-logi' id='login' value='Entrar'/>
+                </form>
+                ";
+            } else {
+                echo "
+                    <div class='loged'>
+                        <form onsubmit='return logoutForm(this)'>
+                        ". $_COOKIE["user_name"]."
+                        <input type='submit' class='boton' id='logout' value='Salir'/>
+                        </form>
+                    </div>
+                ";
+            }
+        ?>
     </header>
 
 
@@ -88,15 +118,18 @@ $new = $result->fetch_assoc()
         <div class="p-footer">
             <p>Centro comercial Lagoh, Sevilla</p>
             <p>670809010</p>
-            <a href="../views/legal.php" class="p-legal">Aviso legal</a>
+            <a href="/zapatilleate/views/legal.php" class="p-legal">Aviso legal</a>
         </div>
         <div class="div-footer">
-            <img src="../img/insta-icon.png" class="footer-img" alt="instagram">
-            <img src="../img/face-icon.png" class="footer-img" alt="facebook">
+            <img src="/zapatilleate/img/insta-icon.png" class="footer-img" alt="instagram">
+            <img src="/zapatilleate/img/face-icon.png" class="footer-img" alt="facebook">
         </div>
     </footer>
     <!--Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/zapatilleate/js/validation.js"></script>
+    <script src="/zapatilleate/js/login.js"></script>
 </body>
 
 </html>

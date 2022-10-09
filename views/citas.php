@@ -12,7 +12,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM `noticias` order by fecha DESC limit 5";
+    $sql = "SELECT * FROM `citas` WHERE fk_idUsuario = ".$_COOKIE['user_id']." ORDER BY fecha ";
     $result = $conn->query($sql);
 
     if(!isset($_COOKIE['user_id'])) {
@@ -42,6 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/zapatilleate/css/news.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>Trabajo obligatorio - Zapatilleate</title>
 </head>
 
@@ -69,8 +70,8 @@
             </ul>
         </nav>
         <div class='loged'>
-            <?php echo $_COOKIE['user_name'] ?>
             <form onsubmit='return logoutForm(this)'>
+            <?php echo $_COOKIE['user_name'] ?>
             <input type='submit' class='boton' id='logout' value='Salir'/>
             </form>
         </div>

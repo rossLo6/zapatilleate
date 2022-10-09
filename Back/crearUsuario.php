@@ -17,7 +17,7 @@ $sqlLogin = "SELECT * FROM `usuarios` where usuario = '".$_POST['usuario']."'";
 $result = $conn->query($sqlLogin);
 
 if ($result->num_rows > 0) {
-  http_response_code(500);
+  http_response_code(300);
 } else {
   $sql = "INSERT INTO usuarios (fk_idRol, usuario, password, nombre, apellido1, apellido2, email, fnac, telefono)
   VALUES (2,
@@ -66,7 +66,25 @@ if ($result->num_rows > 0) {
   } else {
     echo "Error: " . $sql3 . "<br>" . $conn->error;
   }
+
+  $sql4 = "SELECT * FROM `proyectos` WHERE fk_idUsuario=".$idUsuario['idUsuario'];
+  $result4 = $conn->query($sql4);
+  $idProyecto = $result4->fetch_assoc();
+  
+  $sql5 = "INSERT INTO citas (fk_idUsuario, fk_idProyecto, fecha)
+    VALUES (".$idUsuario['idUsuario'].",
+        ".$idProyecto['idProyecto'].",
+        '".$newdate."')";
+
+        if ($conn->query($sql5) === TRUE) {
+          echo "Nueva cita creada";
+        } else {
+          echo "Error: " . $sql5 . "<br>" . $conn->error;
+        }
 }
+
+
+
 
 
 

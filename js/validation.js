@@ -25,7 +25,7 @@ function validar(f) {
     ok = "si";
 
     //Usuario
-    var usuario = document.getElementById("usuario").value;
+    var usuario = document.getElementById("user").value;
     if (!usuario || usuario == '') {
         ok = "no";
         msg = msg + "El campo 'Usuario' no puede estar vacío.\n"
@@ -36,14 +36,14 @@ function validar(f) {
         }
     }
     //Contraseña
-    var password = document.getElementById("password").value;
+    var password = document.getElementById("pass").value;
     if (!password || password == '') {
         ok = "no";
         msg = msg + "El campo 'Contraseña' no puede estar vacío.\n"
     } else {
         if (!validatePassword(password)) {
             ok = 'no'
-            msg = msg + "La contraseña no puede tener carácteres especiales. \n"
+            msg = msg + "La contraseña no puede tener menos de 6 carácteres ni carácteres especiales. \n"
         }
     }
 
@@ -98,8 +98,8 @@ function validar(f) {
         return false;
     }
     //Datos de usuarios
-    var usuario = $('#usuario').val();
-    var password = $('#password').val();
+    var usuario = $('#user').val();
+    var password = $('#pass').val();
     var nombre = $('#name').val();
     var apellido1 = $('#apellido1').val();
     var apellido2 = $('#apellido2').val();

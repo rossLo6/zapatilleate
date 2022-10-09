@@ -39,6 +39,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
     <link rel="stylesheet" type="text/css" href="/zapatilleate/css/news.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>Trabajo obligatorio - Zapatilleate</title>
 </head>
 
@@ -81,14 +82,14 @@
                 <form id='login-form' class='login' onsubmit='return loginForm(this)'>
                     <input type='text' id='usuario'>
                     <input type='password' id='password'>
-                    <input type='submit' class='boton' id='login' value='Entrar'/>
+                    <input type='submit' class='boton-logi' id='login' value='Entrar'/>
                 </form>
                 ";
             } else {
                 echo "
                     <div class='loged'>
-                        ". $_COOKIE[$cookie_name]."
                         <form onsubmit='return logoutForm(this)'>
+                        ". $_COOKIE[$cookie_name]."
                         <input type='submit' class='boton' id='logout' value='Salir'/>
                         </form>
                     </div>

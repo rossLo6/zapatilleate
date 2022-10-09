@@ -1,0 +1,45 @@
+.login{
+    margin-top: 33px;
+float: right;
+width: 240px;
+padding-top: 30px;
+}
+
+.login input{
+    margin-bottom: 6px; 
+    margin-left: 23px;
+    border: 1px solid;
+    border-radius: 6px;
+    border-color: var(--color-1);
+
+}
+
+.login .boton-logi{
+    margin-left: 84px;
+    font-weight: bold;
+    font-size: medium;
+    border-radius: 15px;
+    background-color: var(--color-5);
+    padding: 12px;
+    border: 10px var(--color-3);
+}
+
+
+.loged{
+    margin-top: 33px;
+    float: right;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    width: 250px;
+}
+#logout{
+    margin-top:5px;
+    margin-bottom: 10px;
+    width: 80px;
+    margin-left: 15px;
+}
+
+.loged form{
+    padding-top: 0px;
+}

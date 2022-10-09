@@ -87,15 +87,17 @@ header {
 
 #header-nav {
     overflow: hidden;
-    width: 540px;
+    width: 445px;
     padding-top: 28px;
+    float: left;
 }
 
 #header-nav ul {
     float: right;
     display: block;
     margin-top: 0%;
-    margin-right: 5%;
+    margin-right: 0px;
+    padding: 0px;
 }
 
 #header-nav ul li {

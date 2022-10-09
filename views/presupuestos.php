@@ -30,7 +30,7 @@ $result = $conn->query($sql);
     <meta name="revisit-after" content="2 days" />
     <meta name="category" content="Trabajo obligatorio" />
     <!-- Llamada icono-->
-    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/zapatilleate/favicon.ico" />
     <!-- Llamada googleFonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,21 +38,22 @@ $result = $conn->query($sql);
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Declaración de fichero de estilos -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>Pídeme</title>
 </head>
 
 <body>
     <!-- HEADER -->
     <header>
-        <a href="../index.php" class="div-header">
-            <img src="../img/header.jpg" alt="imagen zapatillas" id="header-img">
+        <a href="/zapatilleate/index.php" class="div-header">
+            <img src="/zapatilleate/img/header.jpg" alt="imagen zapatillas" id="header-img">
             <h1>Zapatilleate</h1>
         </a>
         <nav id="header-nav">
             <ul>
                 <li>
-                    <a href="../index.php">Inicio</a>
+                    <a href="/zapatilleate/index.php">Inicio</a>
                 </li>
                 <li>
                     <a href="./productos.php">Productos</a>
@@ -65,6 +66,26 @@ $result = $conn->query($sql);
                 </li>
             </ul>
         </nav>
+        <?php
+            if(!isset($_COOKIE["user_id"])) {
+                echo "
+                <form id='login-form' class='login' onsubmit='return loginForm(this)'>
+                    <input type='text' id='usuario'>
+                    <input type='password' id='password'>
+                    <input type='submit' class='boton-logi' id='login' value='Entrar'/>
+                </form>
+                ";
+            } else {
+                echo "
+                    <div class='loged'>
+                        <form onsubmit='return logoutForm(this)'>
+                        ". $_COOKIE["user_name"]."
+                        <input type='submit' class='boton' id='logout' value='Salir'/>
+                        </form>
+                    </div>
+                ";
+            }
+        ?>
     </header>
     <section>
         <h2>Regístrate</h2>
@@ -74,9 +95,9 @@ $result = $conn->query($sql);
             <fieldset>
                 <legend>Datos:</legend>
                 <label for="name" class="label">Usuario: </label>
-                <input id="usuario" name="name" type="text" class="cuadros" placeholder="Escribe tu nombre de USUARIO" required/>
+                <input id="user" name="name" type="text" class="cuadros" placeholder="Escribe tu nombre de USUARIO" required/>
                 <label for="name" class="label">Contraseña: </label>
-                <input id="password" name="name" type="text" class="cuadros" placeholder="Escribe tu contraseña" required/>
+                <input id="pass" name="name" type="text" class="cuadros" placeholder="Escribe tu contraseña" required/>
                 <label for="name" class="label">Nombre: </label>
                 <input id="name" name="name" type="text" class="cuadros" placeholder="Escribe tu nombre" required/>
                 <label for="name" class="label">Primer Apellido: </label>
@@ -149,11 +170,11 @@ $result = $conn->query($sql);
         <div class="p-footer">
             <p>Centro comercial Lagoh, Sevilla</p>
             <p>670809010</p>
-            <a href="../views/legal.php" class="p-legal">Aviso legal</a>
+            <a href="/zapatilleate/views/legal.php" class="p-legal">Aviso legal</a>
         </div>
         <div class="div-footer">
-            <img src="../img/insta-icon.png" class="footer-img" alt="instagram">
-            <img src="../img/face-icon.png" class="footer-img" alt="facebook">
+            <img src="/zapatilleate/img/insta-icon.png" class="footer-img" alt="instagram">
+            <img src="/zapatilleate/img/face-icon.png" class="footer-img" alt="facebook">
         </div>
     </footer>
     <!--Bootstrap JS -->
@@ -161,8 +182,9 @@ $result = $conn->query($sql);
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--Validaciones con JS -->
-    <script src="../js/validation.js"></script>
-    <script src="../js/presupuesto.js"></script>
+    <script src="/zapatilleate/js/validation.js"></script>
+    <script src="/zapatilleate/js/presupuesto.js"></script>
+    <script src="/zapatilleate/js/login.js"></script>
 
 </body>
 
