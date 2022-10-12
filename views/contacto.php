@@ -29,57 +29,7 @@
 
 <body>
     <!--  HEADER  -->
-    <header>
-        <a href="/zapatilleate/index.php" class="div-header">
-            <img src="/zapatilleate/img/header.jpg" alt="imagen zapatillas" id="header-img">
-            <h1>Zapatilleate</h1>
-        </a>
-        <nav id="header-nav">
-            <ul>
-                <li>
-                    <a href="/zapatilleate/index.php">Inicio</a>
-                </li>
-                <li>
-                    <a href="./productos.php">Productos</a>
-                </li>
-                <li>
-                <?php
-                        if(!isset($_COOKIE["user_id"])) {
-                            echo "
-                                <a href='/zapatilleate/views/presupuestos.php'>Presupuesto</a>
-                            ";
-                        } else {
-                            echo "
-                                <a href='/zapatilleate/views/citas.php'>Citas</a>
-                            ";
-                        }
-                    ?>                </li>
-                <li class="active">
-                    <a href="./contacto.php">Contacto</a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-            if(!isset($_COOKIE["user_id"])) {
-                echo "
-                <form id='login-form' class='login' onsubmit='return loginForm(this)'>
-                    <input type='text' id='usuario'>
-                    <input type='password' id='password'>
-                    <input type='submit' class='boton-logi' id='login' value='Entrar'/>
-                </form>
-                ";
-            } else {
-                echo "
-                    <div class='loged'>
-                        <form onsubmit='return logoutForm(this)'>
-                        ". $_COOKIE["user_name"]."
-                        <input type='submit' class='boton' id='logout' value='Salir'/>
-                        </form>
-                    </div>
-                ";
-            }
-        ?>
-    </header>
+    <?php include 'header.php';?>
     <!--  MAP  -->
     <div id="map">
 
@@ -91,27 +41,12 @@
         <h2 class="section-map2">¡OS ESPERAMOS!</h2>
     </section>
     <!--  FOOTER  -->
-    <footer>
-        <div class="p-footer">
-            <p>Centro comercial Lagoh, Sevilla</p>
-            <p>670809010</p>
-            <a href="/zapatilleate/views/legal.php" class="p-legal">Aviso legal</a>
-        </div>
-        <div class="div-footer">
-            <img src="/zapatilleate/img/insta-icon.png" class="footer-img" alt="logo instagram">
-            <img src="/zapatilleate/img/face-icon.png" class="footer-img" alt="logo facebook">
-        </div>
-    </footer>
+    <?php include 'footer.php';?>
     <!--LeafletJS-->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-    <!--Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--JS -->
     <script src="/zapatilleate/js/mapa.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/zapatilleate/js/validation.js"></script>
-    <script src="/zapatilleate/js/login.js"></script>
 </body>
 
 </html>

@@ -40,8 +40,9 @@ function loginForm(f) {
         url: "http://localhost/zapatilleate/Back/login.php",
         type: "post",
         success: function(response) {
-            location.reload();
-        }, error: function (response) {
+            window.location.href = '/zapatilleate/views/citas.php';
+        },
+        error: function(response) {
             alert("usuario o contraseña incorrectos");
         }
     });

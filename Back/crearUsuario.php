@@ -71,10 +71,11 @@ if ($result->num_rows > 0) {
   $result4 = $conn->query($sql4);
   $idProyecto = $result4->fetch_assoc();
   
-  $sql5 = "INSERT INTO citas (fk_idUsuario, fk_idProyecto, fecha)
+  $sql5 = "INSERT INTO citas (fk_idUsuario, fk_idProyecto, fecha, hora)
     VALUES (".$idUsuario['idUsuario'].",
         ".$idProyecto['idProyecto'].",
-        '".$newdate."')";
+        '".$newdate."',
+        '10:00')";
 
         if ($conn->query($sql5) === TRUE) {
           echo "Nueva cita creada";

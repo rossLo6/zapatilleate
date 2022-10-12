@@ -1,0 +1,35 @@
+.divtabla {
+    text-align: center;
+    margin: auto;
+}
+
+.divtabla h1 {
+    margin-top: 0%;
+}
+
+.tabla {
+    margin: auto;
+    border-radius: 5%;
+    border-color: var(--color-1);
+    border-width: medium;
+    border-style: solid;
+}
+
+th {
+    font-weight: 750;
+    font-style: italic;
+    font-size: 24px;
+    border-width: 6px;
+    padding: 10px 15px;
+}
+
+tr {
+    background-color: var(--color-2);
+    border-width: 6px;
+}
+
+td {
+    background-color: var(--color-5);
+    border-width: 6px;
+    padding: 4px 15px;
+}

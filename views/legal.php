@@ -24,78 +24,14 @@
 </head>
 
 <body>
-    <header>
-        <a href="/zapatilleate/index.php" class="div-header">
-            <img src="/zapatilleate/img/header.jpg" alt="imagen zapatillas" id="header-img">
-            <h1>Zapatilleate</h1>
-        </a>
-        <nav id="header-nav">
-            <ul>
-                <li>
-                    <a href="/zapatilleate/index.php">Inicio</a>
-                </li>
-                <li>
-                    <a href="./productos.php">Productos</a>
-                </li>
-                <li>
-                <?php
-                        if(!isset($_COOKIE[$cookie_name])) {
-                            echo "
-                                <a href='./views/presupuestos.php'>Presupuesto</a>
-                            ";
-                        } else {
-                            echo "
-                                <a href='./views/citas.php'>Citas</a>
-                            ";
-                        }
-                    ?>                </li>
-                <li>
-                    <a href="./contacto.php">Contacto</a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-            if(!isset($_COOKIE["user_id"])) {
-                echo "
-                <form id='login-form' class='login' onsubmit='return loginForm(this)'>
-                    <input type='text' id='usuario'>
-                    <input type='password' id='password'>
-                    <input type='submit' class='boton-logi' id='login' value='Entrar'/>
-                </form>
-                ";
-            } else {
-                echo "
-                    <div class='loged'>
-                        <form onsubmit='return logoutForm(this)'>
-                        ". $_COOKIE["user_name"]."
-                        <input type='submit' class='boton' id='logout' value='Salir'/>
-                        </form>
-                    </div>
-                ";
-            }
-        ?>
-    </header>
+    <!-- HEADER -->
+    <?php include 'header.php';?>
     <h1>Esto sería una página de Aviso Legal</h1>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius voluptatem maxime quos, sapiente dolorem molestiae unde. Quibusdam error nisi praesentium assumenda. Quae dolores amet ipsa asperiores voluptatibus. Cum amet at ea quaerat. Consectetur
-        eius dolor itaque ullam facere aliquam, rem nihil velit placeat consequuntur corrupti. Fugiat temporibus architecto expedita molestiae aspernatur deleniti harum iusto nemo non omnis veritatis ea maxime soluta, asperiores quae rem aliquam consequatur
-        officia pariatur accusantium obcaecati, a labore quisquam quia. Quis non minus neque assumenda explicabo quos, at fugit quaerat maxime eum, pariatur amet eaque tenetur similique voluptas. Odio facilis ducimus perspiciatis est non earum vitae.</p>
-    <footer>
-        <div class="p-footer">
-            <p>Centro comercial Lagoh, Sevilla</p>
-            <p>670809010</p>
-            <a href="/zapatilleate/views/legal.php" class="p-legal">Aviso legal</a>
-        </div>
-        <div class="div-footer">
-            <img src="/zapatilleate/img/insta-icon.png" class="footer-img" alt="instagram">
-            <img src="/zapatilleate/img/face-icon.png" class="footer-img" alt="facebook">
-        </div>
-    </footer>
-    <!--Bootstrap JS -->
-    <script src="/zapatilleate/js/javascript.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/zapatilleate/js/validation.js"></script>
-    <script src="/zapatilleate/js/login.js"></script>
+    eius dolor itaque ullam facere aliquam, rem nihil velit placeat consequuntur corrupti. Fugiat temporibus architecto expedita molestiae aspernatur deleniti harum iusto nemo non omnis veritatis ea maxime soluta, asperiores quae rem aliquam consequatur
+    officia pariatur accusantium obcaecati, a labore quisquam quia. Quis non minus neque assumenda explicabo quos, at fugit quaerat maxime eum, pariatur amet eaque tenetur similique voluptas. Odio facilis ducimus perspiciatis est non earum vitae.</p>
+    <!-- Footer -->
+    <?php include 'footer.php';?>
 </body>
 
 </html>

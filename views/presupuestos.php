@@ -45,48 +45,7 @@ $result = $conn->query($sql);
 
 <body>
     <!-- HEADER -->
-    <header>
-        <a href="/zapatilleate/index.php" class="div-header">
-            <img src="/zapatilleate/img/header.jpg" alt="imagen zapatillas" id="header-img">
-            <h1>Zapatilleate</h1>
-        </a>
-        <nav id="header-nav">
-            <ul>
-                <li>
-                    <a href="/zapatilleate/index.php">Inicio</a>
-                </li>
-                <li>
-                    <a href="./productos.php">Productos</a>
-                </li>
-                <li class="active">
-                    <a href="./presupuestos.php">Regístrate</a>
-                </li>
-                <li>
-                    <a href="./contacto.php">Contacto</a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-            if(!isset($_COOKIE["user_id"])) {
-                echo "
-                <form id='login-form' class='login' onsubmit='return loginForm(this)'>
-                    <input type='text' id='usuario'>
-                    <input type='password' id='password'>
-                    <input type='submit' class='boton-logi' id='login' value='Entrar'/>
-                </form>
-                ";
-            } else {
-                echo "
-                    <div class='loged'>
-                        <form onsubmit='return logoutForm(this)'>
-                        ". $_COOKIE["user_name"]."
-                        <input type='submit' class='boton' id='logout' value='Salir'/>
-                        </form>
-                    </div>
-                ";
-            }
-        ?>
-    </header>
+<?php include 'header.php';?>
     <section>
         <h2>Regístrate</h2>
         <!-- FORM -->
@@ -132,7 +91,6 @@ $result = $conn->query($sql);
                 $conn->close();
             ?>
                 </select>
-
                 <label for="plazo" class="label">Cuando desea recivir su pedido:</label>
                 <input type="number" id="plazo" max="20" min="3" value="3" required/>
                 <select name="elije" id="selectPlazo">
@@ -166,25 +124,10 @@ $result = $conn->query($sql);
         </form>
     </section>
     <!-- FOOTER -->
-    <footer>
-        <div class="p-footer">
-            <p>Centro comercial Lagoh, Sevilla</p>
-            <p>670809010</p>
-            <a href="/zapatilleate/views/legal.php" class="p-legal">Aviso legal</a>
-        </div>
-        <div class="div-footer">
-            <img src="/zapatilleate/img/insta-icon.png" class="footer-img" alt="instagram">
-            <img src="/zapatilleate/img/face-icon.png" class="footer-img" alt="facebook">
-        </div>
-    </footer>
-    <!--Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!--JQuery-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <?php include 'footer.php';?>
     <!--Validaciones con JS -->
-    <script src="/zapatilleate/js/validation.js"></script>
     <script src="/zapatilleate/js/presupuesto.js"></script>
-    <script src="/zapatilleate/js/login.js"></script>
+    
 
 </body>
 
