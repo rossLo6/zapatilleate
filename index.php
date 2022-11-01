@@ -1,16 +1,6 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $bbdd = "zapatilleate";
-    $port = 3308;
-
-    // Conexion con la BBDD
-    $conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include 'Back/bbdd.php';
+    //require_once(dirname(__FILE__) . '/zapatilleate/Back/bbdd.php');
 
     $sql = "SELECT * FROM `noticias` order by fecha DESC limit 5";
     $result = $conn->query($sql);

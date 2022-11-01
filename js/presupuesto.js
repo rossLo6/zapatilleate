@@ -11,27 +11,27 @@ function calculatePrice() {
     amount -= (multiplicador * parseFloat($("#plazo")[0].value));
     //Extras
     $('.customcheck:checked').each(
-        function() {
+        function () {
             amount += parseFloat($(this).val());
         }
     );
     $("#total").val((amount || 0) + " €");
 }
-$(document).ready(function() {
-    $.getJSON("http://localhost/zapatilleate/back/obtenerPreoducto.php", function(data) {
+$(document).ready(function () {
+    $.getJSON("/zapatilleate/back/obtenerPreoducto.php", function (data) {
         prices = data;
     });
     $("#elijeProducto")
-        .change(function() {
+        .change(function () {
             calculatePrice();
         })
     $("#plazo")
-        .change(function() {
+        .change(function () {
             calculatePrice();
         });
     // cambiar descuento de dias a meses
     $("#selectPlazo")
-        .change(function() {
+        .change(function () {
             if (this.value == "meses") {
                 $("#plazo").attr({
                     "max": 4,
@@ -48,7 +48,7 @@ $(document).ready(function() {
             calculatePrice();
         });
     $(".customcheck")
-        .change(function() {
+        .change(function () {
             calculatePrice();
         });
 });

@@ -1,22 +1,11 @@
 <?php
 
-if(!isset($_COOKIE['user_id'])) {
-    header("Location: /zapatilleate/index.php");
-    exit();
-}
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $bbdd = "zapatilleate";
-    $port = 3308;
-
-    // Conexion con la BBDD
-    //mostrar citas
-    $conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if(!isset($_COOKIE['user_id'])) {
+        header("Location: /zapatilleate/index.php");
+        exit();
     }
+
+    include '../Back/bbdd.php';
 
     $sql = "SELECT * FROM `citas` INNER JOIN `proyectos` ON fk_idProyecto = idProyecto WHERE citas.fk_idUsuario = ".$_COOKIE['user_id']." ORDER BY fecha ";
     $result = $conn->query($sql);
@@ -61,114 +50,143 @@ if(!isset($_COOKIE['user_id'])) {
     <!-- HEADER -->
     <?php include 'header.php';?>
     <main>
-    <div class="divtabla">
-        <h1>Mis Citas</h1>   
-<table class="tabla">
-
-<tr>
-    <th>Fecha</th>
-    <th>Hora</th>
-    <th>Proyecto</th>
-    <th>Editar</th>
-  </tr>
-  <?php
-            //Comprobar datos y mostrarlos
-                if ($result->num_rows > 0) {
-                
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>". $row["fecha"]."</td>";
-                        echo "<td>". $row["hora"]."</td>";
-                            echo "<td>". $row["nombre"]."</td>";
-                                
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "0 results";
-                }
-            ?>
-</table>
-</div>
-<h2>Pedir nueva cita:</h2>
-    <form id="form2" onsubmit="return validarcita(this)">
-    <fieldset>
-    <label for="citaproyecto" class="label">Selecciona el proyecto y la fecha y hora para tu nueva cita:</label>
-    <select name="nuevacita" id="citaproyecto" class="cuadros">
-    <?php
-    if ($result2->num_rows > 0) {
-                
-                while($row = $result2->fetch_assoc()) {
-                    echo "<option value='". $row['idProyecto']."'>". $row['nombre']."</option>";
-                        
-                }
-            }
-            $conn->close();
-        ?>
-        </select>
-        <label for="newdate"></label>
-        <input
-        id="newdate"
-        type="datetime-local"
-        name="nuevafecha" class="cuadros"/>
-        </fieldset>
-        <fieldset>
-                <input type="reset" value="Borrar todo" class="boton" id="boton1" />
-                <input type="submit" class="boton" id="boton2" />
-            </fieldset>
- </form>
-
- <h2>Crear nuevo proyecto:</h2>
- <form id="form2" onsubmit="return validarproyecto(this)">
-    <fieldset>
-                <label for="name" class="label">Proyecto:</label>
-                <input id="nombreProyecto" name="name" type="text" class="cuadros" placeholder="Elige el nombre de tu proyecto" required/>
-                <label for="elijeProducto" class="label">Elije tus zapatillas:</label>
-                <select name="elije" id="elijeProducto" required>
-                <option value="" disabled selected>Selecciona una opción</option>
+        <div class="botones">
+        <button onclick="showNewProject()">Nuevo Proyecto</button>
+        <button onclick="showNewCita()">Nueva Cita</button>
+        </div>
+        <div class="divtabla">
+            <h1>Mis Citas</h1>   
+            <table class="tabla">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Proyecto</th>
+                    <th>Editar</th>
+                </tr>
                 <?php
-            //Comprobar datos y mostrarlos
-                if ($result3->num_rows > 0) {
-                
-                    while($row = $result3->fetch_assoc()) {
-                        echo "<option value='". $row['idProducto']."'>". $row['nombre']."</option>";
-                            
+                    //Comprobar datos y mostrarlos
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>". $row["fecha"]."</td>";
+                            echo "<td>". $row["hora"]."</td>";
+                            echo "<td>". $row["nombre"]."</td>";
+                            echo "<td><button onclick=\"showEditCita(". $row["idCita"].",'". $row["fecha"]."','". $row["hora"]."')\">Editar</button></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "0 results";
                     }
-                }
-                $conn->close();
-            ?>
-                </select>
+                ?>
+            </table>
+        </div>
+        
+        <div id="nueva-cita" style="display: none;">
+            <h2>Pedir nueva cita:</h2>
+            <form id="form1" onsubmit="return validarcita(this)">
+                <fieldset>
+                    <label for="citaproyecto" class="label">Selecciona el proyecto y la fecha y hora para tu nueva cita:</label>
+                    <select name="nuevacita" id="citaproyecto" class="cuadros">
+                        <?php
+                            if ($result2->num_rows > 0) {
+                                while($row = $result2->fetch_assoc()) {
+                                    echo "<option value='". $row['idProyecto']."'>". $row['nombre']."</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                    <label for="newdate"></label>
+                    <input
+                        id="newdate"
+                        type="datetime-local"
+                        name="nuevafecha"
+                        class="cuadros"
+                    />
+                </fieldset>
+                <fieldset>
+                    <input type="reset" value="Borrar todo" class="boton" id="boton1" />
+                    <input type="submit" class="boton" id="boton2" />
+                </fieldset>
+            </form>
+        </div>
 
-                <label for="plazo" class="label">Cuando desea recivir su pedido:</label>
-                <input type="number" id="plazo" max="20" min="3" value="3" required/>
-                <select name="elije" id="selectPlazo">
-                    <option value="dias">Días</option>
-                    <option value="meses">Meses</option>
-                </select>
-                <div>
-                    <label class="label">Personalice sus extras: </label>
+        <div id="nuevo-proyecto" style="display: none;">
+            <h2>Crear nuevo proyecto:</h2>
+            <form id="form2" onsubmit="return validarproyecto(this)">
+                <fieldset>
+                    <label for="name" class="label">Proyecto:</label>
+                    <input id="nombreProyecto" name="name" type="text" class="cuadros" placeholder="Elige el nombre de tu proyecto" required/>
+                    <label for="elijeProducto" class="label">Elije tus zapatillas:</label>
+                    <select name="elije" id="elijeProducto" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <?php
+                            //Comprobar datos y mostrarlos
+                            if ($result3->num_rows > 0) {
+                                while($row = $result3->fetch_assoc()) {
+                                    echo "<option value='". $row['idProducto']."'>". $row['nombre']."</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+    
+                    <label for="plazo" class="label">Cuando desea recivir su pedido:</label>
+                    <input type="number" id="plazo" max="20" min="3" value="3" required/>
+                    <select name="elije" id="selectPlazo">
+                        <option value="dias">Días</option>
+                        <option value="meses">Meses</option>
+                    </select>
+                    <div>
+                        <label class="label">Personalice sus extras: </label>
+                        <label for="personalizado1">Color personalizado: </label>
+                        <input type="checkbox" class="customcheck" id="personalizado1" value="6" />
+                        <label for="personalizado2">Logo personalizado: </label>
+                        <input type="checkbox" id="personalizado2" class="customcheck" value="5" />
+                        <label for="personalizado3">Pon tu nombre: </label>
+                        <input type="checkbox" id="personalizado3" class="customcheck" value="2" />
+                    </div>
+                    <label for="total" class="label">Presupuesto final: </label>
+                    <input id="total" name="name" type="text" class="cuadros" disabled />
+                </fieldset>
+                <!-- envio formulario -->
+                <fieldset>
+                    <input type="reset" value="Borrar todo" class="boton" id="boton1" />
+                    <input type="submit" class="boton" id="boton2" />
+                </fieldset>
+            </form>
+        </div>
 
-                    <label for="personalizado1">Color personalizado: </label>
-                    <input type="checkbox" class="customcheck" id="personalizado1" value="6" />
-                    <label for="personalizado2">Logo personalizado: </label>
-                    <input type="checkbox" id="personalizado2" class="customcheck" value="5" />
-                    <label for="personalizado3">Pon tu nombre: </label>
-                    <input type="checkbox" id="personalizado3" class="customcheck" value="2" />
-                </div>
-                <label for="total" class="label">Presupuesto final: </label>
-                <input id="total" name="name" type="text" class="cuadros" disabled />
-            </fieldset>
-            <!-- envio formulario -->
-            <fieldset>
-                <input type="reset" value="Borrar todo" class="boton" id="boton1" />
-                <input type="submit" class="boton" id="boton2" />
-            </fieldset>
-                </form>
+
+        <div id="editar-cita" style="display: none;">
+            <h2>Editar cita:</h2>
+            <form id="form3" onsubmit="return editarCita(this)">
+                <fieldset>
+                    <input
+                        id="editId"
+                        type="hidden"
+                    />
+                    <label for="editDate" class="label">Selecciona la nueva fecha y hora:</label>
+                    <input
+                        id="editDate"
+                        type="datetime-local"
+                        name="nuevafecha"
+                        class="cuadros"
+                    />
+                </fieldset>
+                <fieldset>
+                    <input type="reset" value="Cancelar" class="boton" id="boton1" />
+                    <input type="submit" class="boton" id="boton2" />
+                </fieldset>
+            </form>
+        </div>
+
     </main>
     <!-- FOOTER -->
     <?php include 'footer.php';?>
     <script src="/zapatilleate/js/nuevaCitaProyecto.js"></script>
     <script src="/zapatilleate/js/presupuesto.js"></script>
-    
+    <?php
+        $conn->close();
+    ?>
 </body>
 
 </html>

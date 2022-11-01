@@ -25,4 +25,18 @@
             <span>Noticias</span>
         </a>
     </li>
+
+    <li class="nav-item <?php echo ($_SERVER['PHP_SELF'] == '/zapatilleate/views/admin/productos.php' ? ' active' : '');?>">
+        <a class="nav-link" href="/zapatilleate/views/admin/productos.php">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Productos</span>
+        </a>
+    </li>
+
+    <li class="nav-item <?php echo ($_SERVER['PHP_SELF'] == '/zapatilleate/views/admin/usuarios.php' ? ' active' : '');?>">
+        <a class="nav-link" href="/zapatilleate/views/admin/usuarios.php">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Usuarios</span>
+        </a>
+    </li>
 </ul>

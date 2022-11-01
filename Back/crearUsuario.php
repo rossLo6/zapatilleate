@@ -1,17 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$bbdd = "zapatilleate";
-$port = 3308;
-
-// Conexion con la BBDD
-$conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+include 'bbdd.php';
 
 $sqlLogin = "SELECT * FROM `usuarios` where usuario = '".$_POST['usuario']."'";
 $result = $conn->query($sqlLogin);

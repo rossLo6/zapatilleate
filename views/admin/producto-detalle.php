@@ -1,8 +1,12 @@
 <?php
     include '../../Back/bbdd.php';
 
-    $sql = "SELECT noticias.*, categorias.nombre FROM `noticias` INNER JOIN `categorias` ON fk_idCategoria = idCategoria order by fecha DESC";
+    $sql = "SELECT * FROM `productos` WHERE idProducto = ".$_GET["id"];
     $result = $conn->query($sql);
+    $producto = $result->fetch_assoc();
+
+    $sql2 = "SELECT * FROM `categorias`";
+    $result2 = $conn->query($sql2);
 ?>
 
 <!DOCTYPE html>
@@ -51,55 +55,43 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 title-with-button">
-                        Administracion
-                        <button class="button-new" onclick="goToNuevaNoticia()">Nueva noticia</button>
-                    </h1>
+                    <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
-                                            <th>Categoria</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
-                                            <th>Categoria</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
+                            <form class="admin-form" onsubmit="return updateProducto(this)">
+                                <input id="producto_id" name="producto_id" type="hidden" value="<?php echo $producto["idProducto"]; ?>" required/>
+                                <div>
+                                    <label for="nombre" class="label">Nombre: </label>
+                                    <input id="nombre" name="nombre" type="text" value="<?php echo $producto["nombre"]?>" required/>
+                                </div>
+                                <div>
+                                    <label for="precio" class="label">Precio: </label>
+                                    <input id="precio" name="precio" type="number" value="<?php echo $producto["precio"]?>" required/>
+                                </div>
+                                <div>
+                                    <label for="imagen" class="label">Imagen: </label>
+                                    <input id="imagen" name="imagen" type="text" value="<?php echo $producto["imagen"]?>"/>
+                                </div>
+                                <div>
+                                    <label for="categoria" class="label">Categoria: </label>
+                                    <select name="categoria" id="categoria" required>
                                         <?php
-                                            //Comprobar datos y mostrarlos
-                                            if ($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/noticia-detalle.php?id=".$row["idNoticia"]."'>
-                                                        <td>".$row["autor"]."</td>
-                                                        <td>".$row["titulo"]."</td>
-                                                        <td>".$row["nombre"]."</td>
-                                                        <td>".$row["fecha"]."</td>
-                                                    </tr>";
+                                            if ($result2->num_rows > 0) {
+                                                while($row = $result2->fetch_assoc()) {
+                                                    echo "<option value='". $row['idCategoria']."' ".($row['idCategoria'] == $producto["idCategoria"] ? "selected='selected'" : "")."'>". $row['nombre']."</option>";
                                                 }
-                                            } else {
-                                                echo "<tr>0 resultados</tr>";
                                             }
                                             $conn->close();
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </select>
+                                </div>
+                                <input type="submit"/>
+                            </form>
                         </div>
                     </div>
 
@@ -132,7 +124,7 @@
     <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/js/admin/noticias.js"></script>
+    <script src="/zapatilleate/js/admin/productos.js"></script>
 </body>
 
 </html>

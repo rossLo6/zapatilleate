@@ -1,7 +1,7 @@
 <?php
     include '../../Back/bbdd.php';
 
-    $sql = "SELECT noticias.*, categorias.nombre FROM `noticias` INNER JOIN `categorias` ON fk_idCategoria = idCategoria order by fecha DESC";
+    $sql = "SELECT * FROM `categorias`";
     $result = $conn->query($sql);
 ?>
 
@@ -51,10 +51,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 title-with-button">
-                        Administracion
-                        <button class="button-new" onclick="goToNuevaNoticia()">Nueva noticia</button>
-                    </h1>
+                    <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -62,44 +59,39 @@
                             <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
-                                            <th>Categoria</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
-                                            <th>Categoria</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
+                            <form class="admin-form" onsubmit="return crearNoticia(this)">
+                                <div>
+                                    <label for="autor" class="label">Autor: </label>
+                                    <input id="autor" name="autor" type="text" required/>
+                                </div>
+                                <div>
+                                    <label for="titulo" class="label">Titulo: </label>
+                                    <input id="titulo" name="titulo" type="text" required/>
+                                </div>
+                                <div>
+                                    <label for="cuerpo" class="label">Cuerpo: </label>
+                                    <input id="cuerpo" name="cuerpo" type="text" required/>
+                                </div>
+                                <div>
+                                    <label for="imagen" class="label">Imagen: </label>
+                                    <input id="imagen" name="imagen" type="text" required/>
+                                </div>
+                                <div>
+                                    <label for="categoria" class="label">Categoria: </label>
+                                    <select name="categoria" id="categoria" required>
+                                        <option value="" disabled selected>Selecciona una opción</option>
                                         <?php
-                                            //Comprobar datos y mostrarlos
                                             if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
-                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/noticia-detalle.php?id=".$row["idNoticia"]."'>
-                                                        <td>".$row["autor"]."</td>
-                                                        <td>".$row["titulo"]."</td>
-                                                        <td>".$row["nombre"]."</td>
-                                                        <td>".$row["fecha"]."</td>
-                                                    </tr>";
+                                                    echo "<option value='". $row['idCategoria']."'>". $row['nombre']."</option>";
                                                 }
-                                            } else {
-                                                echo "<tr>0 resultados</tr>";
                                             }
                                             $conn->close();
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </select>
+                                </div>
+                                <input type="submit"/>
+                            </form>
                         </div>
                     </div>
 

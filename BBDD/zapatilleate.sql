@@ -7,9 +7,11 @@
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 7.3.27
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE
+= "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone
+= "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,16 +29,22 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `categorias`
 --
 
-CREATE TABLE `categorias` (
-  `idCategoria` int(11) NOT NULL,
-  `nombre` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+CREATE TABLE `categorias`
+(
+  `idCategoria` int
+(11) NOT NULL,
+  `nombre` varchar
+(20) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`idCategoria`, `nombre`) VALUES
+INSERT INTO `categorias` (`
+idCategoria`,
+`nombre
+`) VALUES
 (1, 'deportistas'),
 (2, 'aventureros'),
 (3, 'fiesteros');
@@ -47,11 +55,15 @@ INSERT INTO `categorias` (`idCategoria`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `citas`
 --
 
-CREATE TABLE `citas` (
-  `idCita` int(11) NOT NULL,
+CREATE TABLE `citas`
+(
+  `idCita` int
+(11) NOT NULL,
   `fecha` datetime NOT NULL,
-  `fk_idUsuario` int(11) NOT NULL,
-  `fk_idProyecto` int(11) NOT NULL
+  `fk_idUsuario` int
+(11) NOT NULL,
+  `fk_idProyecto` int
+(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -60,21 +72,31 @@ CREATE TABLE `citas` (
 -- Estructura de tabla para la tabla `noticias`
 --
 
-CREATE TABLE `noticias` (
-  `idNoticia` int(11) NOT NULL,
-  `autor` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `titulo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+CREATE TABLE `noticias`
+(
+  `idNoticia` int
+(11) NOT NULL,
+  `autor` varchar
+(20) COLLATE utf8_spanish_ci NOT NULL,
+  `titulo` varchar
+(50) COLLATE utf8_spanish_ci NOT NULL,
   `cuerpo` text COLLATE utf8_spanish_ci NOT NULL,
-  `imagen` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
-  `fk_idCategoria` int(11) NOT NULL,
-  `fecha` datetime DEFAULT current_timestamp()
+  `imagen` varchar
+(300) COLLATE utf8_spanish_ci NOT NULL,
+  `fk_idCategoria` int
+(11) NOT NULL,
+  `fecha` datetime DEFAULT current_timestamp
+()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `noticias`
 --
 
-INSERT INTO `noticias` (`idNoticia`, `autor`, `titulo`, `cuerpo`, `imagen`, `fk_idCategoria`, `fecha`) VALUES
+INSERT INTO `noticias` (`
+idNoticia`,
+`autor
+`, `titulo`, `cuerpo`, `imagen`, `fk_idCategoria`, `fecha`) VALUES
 (1, 'Nike', 'Nuevas Nike hechas con materiales sostenibles', 'Vivamus rutrum arcu non mauris laoreet ultrices. Quisque dignissim viverra velit, et eleifend velit finibus quis. Vivamus et cursus nisl. Integer luctus arcu sapien, a consequat enim feugiat sit amet. Aliquam tristique metus elementum vehicula pretium. Ut nunc magna, maximus non tellus id, vestibulum fermentum leo. Quisque sed dignissim massa, sed commodo justo. Ut maximus velit augue, a venenatis tortor tincidunt sit amet. Praesent eget imperdiet nisi, at porta nibh.', 'https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/d8456b17-5d3a-4f87-8c41-9b4e25c03674/air-max-dawn-zapatillas-NbHFzR.png', 1, '2022-09-14 13:56:37'),
 (2, 'Solomon', 'Oferta de cierre de temporada', 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ut bibendum ante. Donec at suscipit massa. Quisque id vulputate nisl. Aliquam venenatis, tortor sed molestie efficitur, massa velit interdum leo, in viverra lorem sapien at nulla. Nunc sem nibh, posuere ac elit quis, egestas laoreet lorem. Cras ac nisi sem. Praesent velit leo, egestas ac efficitur sit amet, fringilla in eros. Etiam convallis, augue nec faucibus sollicitudin, nibh tellus finibus ipsum, vitae vehicula lectus sem ut est. Ut laoreet magna ac iaculis dictum. Quisque dignissim eget metus sit amet aliquam. Curabitur id neque ut tortor pellentesque mattis. Aenean vestibulum efficitur sollicitudin. Aenean nulla leo, tempus sed vulputate at, hendrerit eu odio. Maecenas rutrum orci eu libero molestie laoreet. Ut dignissim ante congue ligula ultricies, et pellentesque urna accumsan.', 'https://www.skioccas.com/3738-large_default/botas-de-ski-salomon-evolucion-80-beige.jpg', 2, '2022-09-14 13:57:06'),
 (3, 'Converse', 'Wedding Shoes', 'Donec iaculis quis lorem ac fermentum. Praesent hendrerit ex ac ex tempor, eu molestie tortor varius. Duis quis quam sapien. Aliquam ornare ex vel nunc vehicula feugiat. Donec venenatis congue felis, sit amet hendrerit ex vehicula et. Nullam at vestibulum sapien, eget congue quam. Vivamus condimentum felis quis sapien pretium condimentum. Suspendisse vel lorem ac nisi finibus ultrices non id urna.\r\n\r\nVestibulum cursus lacus mi. Proin interdum tellus vel metus congue ultricies. Vestibulum est lectus, tempus dignissim rhoncus at, porta id mauris. Cras vel leo dui. Aenean nisl justo, suscipit id placerat a, euismod vitae sem. Mauris a egestas risus. Quisque ut molestie nisi. Mauris mattis, magna a aliquet semper, tortor eros posuere quam, eu sodales est nisi eu leo. Nunc pharetra risus nunc, in posuere neque dignissim sit amet. Sed et imperdiet ex. Aenean gravida lectus a neque consequat consequat.', 'https://i.etsystatic.com/21641783/r/il/635c21/3693903439/il_794xN.3693903439_8hwv.jpg', 3, '2022-09-14 13:57:17'),
@@ -89,19 +111,27 @@ INSERT INTO `noticias` (`idNoticia`, `autor`, `titulo`, `cuerpo`, `imagen`, `fk_
 -- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `productos` (
-  `idProducto` int(11) NOT NULL,
-  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+CREATE TABLE `productos`
+(
+  `idProducto` int
+(11) NOT NULL,
+  `nombre` varchar
+(40) COLLATE utf8_spanish_ci NOT NULL,
   `precio` float NOT NULL,
-  `imagen` varchar(120) COLLATE utf8_spanish_ci NOT NULL,
-  `idCategoria` int(12) NOT NULL
+  `imagen` varchar
+(120) COLLATE utf8_spanish_ci NOT NULL,
+  `idCategoria` int
+(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`idProducto`, `nombre`, `precio`, `imagen`, `idCategoria`) VALUES
+INSERT INTO `productos` (`
+idProducto`,
+`nombre
+`, `precio`, `imagen`, `idCategoria`) VALUES
 (1, 'nike1', 96, '', 1),
 (2, 'salomon1', 96, '', 2),
 (3, 'converse1', 96, '', 3);
@@ -112,16 +142,24 @@ INSERT INTO `productos` (`idProducto`, `nombre`, `precio`, `imagen`, `idCategori
 -- Estructura de tabla para la tabla `proyectos`
 --
 
-CREATE TABLE `proyectos` (
-  `idProyecto` int(11) NOT NULL,
-  `nombre` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `color` tinyint(1) NOT NULL DEFAULT 0,
-  `logo` tinyint(1) NOT NULL DEFAULT 0,
-  `tipografia` tinyint(1) NOT NULL DEFAULT 0,
+CREATE TABLE `proyectos`
+(
+  `idProyecto` int
+(11) NOT NULL,
+  `nombre` varchar
+(40) COLLATE utf8_spanish_ci NOT NULL,
+  `color` tinyint
+(1) NOT NULL DEFAULT 0,
+  `logo` tinyint
+(1) NOT NULL DEFAULT 0,
+  `tipografia` tinyint
+(1) NOT NULL DEFAULT 0,
   `entrega` date NOT NULL,
   `precio` float DEFAULT NULL,
-  `fk_idUsuario` int(11) NOT NULL,
-  `fk_idProducto` int(11) NOT NULL
+  `fk_idUsuario` int
+(11) NOT NULL,
+  `fk_idProducto` int
+(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -130,16 +168,22 @@ CREATE TABLE `proyectos` (
 -- Estructura de tabla para la tabla `rol`
 --
 
-CREATE TABLE `rol` (
-  `idRol` int(11) NOT NULL,
-  `nombre` varchar(15) COLLATE utf8_spanish_ci NOT NULL
+CREATE TABLE `rol`
+(
+  `idRol` int
+(11) NOT NULL,
+  `nombre` varchar
+(15) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `rol`
 --
 
-INSERT INTO `rol` (`idRol`, `nombre`) VALUES
+INSERT INTO `rol` (`
+idRol`,
+`nombre
+`) VALUES
 (1, 'admin'),
 (2, 'usuario');
 
@@ -149,24 +193,37 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `idUsuario` int(11) NOT NULL,
-  `fk_idRol` int(11) NOT NULL,
-  `usuario` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido1` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido2` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+CREATE TABLE `usuarios`
+(
+  `idUsuario` int
+(11) NOT NULL,
+  `fk_idRol` int
+(11) NOT NULL,
+  `usuario` varchar
+(15) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar
+(30) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar
+(30) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido1` varchar
+(30) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido2` varchar
+(30) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar
+(50) COLLATE utf8_spanish_ci NOT NULL,
   `fnac` date NOT NULL,
-  `telefono` int(9) DEFAULT NULL
+  `telefono` int
+(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idUsuario`, `fk_idRol`, `usuario`, `password`, `nombre`, `apellido1`, `apellido2`, `email`, `fnac`, `telefono`) VALUES
+INSERT INTO `usuarios` (`
+idUsuario`,
+`fk_idRol
+`, `usuario`, `password`, `nombre`, `apellido1`, `apellido2`, `email`, `fnac`, `telefono`) VALUES
 (1, 1, 'rosanaAdmin', 'rosanaAdmin', 'Rosana', 'Lopez', 'Lopez', 'rosana.lpz.lpz@gmail.com', '1993-02-15', NULL),
 (6, 2, 'patatoide', 'patata', 'patata', 'patata', '', 'patata@gmail.com', '2022-09-02', 652489956);
 
@@ -178,50 +235,64 @@ INSERT INTO `usuarios` (`idUsuario`, `fk_idRol`, `usuario`, `password`, `nombre`
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`idCategoria`);
+ADD PRIMARY KEY
+(`idCategoria`);
 
 --
 -- Indices de la tabla `citas`
 --
 ALTER TABLE `citas`
-  ADD PRIMARY KEY (`idCita`),
-  ADD KEY `fk_idUsuario` (`fk_idUsuario`),
-  ADD KEY `fk_idProyecto` (`fk_idProyecto`);
+ADD PRIMARY KEY
+(`idCita`),
+ADD KEY `fk_idUsuario`
+(`fk_idUsuario`),
+ADD KEY `fk_idProyecto`
+(`fk_idProyecto`);
 
 --
 -- Indices de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  ADD PRIMARY KEY (`idNoticia`),
-  ADD KEY `fk_idCategoria` (`fk_idCategoria`);
+ADD PRIMARY KEY
+(`idNoticia`),
+ADD KEY `fk_idCategoria`
+(`fk_idCategoria`);
 
 --
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`idProducto`),
-  ADD KEY `fk_idcategoria` (`idCategoria`);
+ADD PRIMARY KEY
+(`idProducto`),
+ADD KEY `fk_idcategoria`
+(`idCategoria`);
 
 --
 -- Indices de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  ADD PRIMARY KEY (`idProyecto`),
-  ADD KEY `fk_idUsuario` (`fk_idUsuario`),
-  ADD KEY `fk_idProducto` (`fk_idProducto`);
+ADD PRIMARY KEY
+(`idProyecto`),
+ADD KEY `fk_idUsuario`
+(`fk_idUsuario`),
+ADD KEY `fk_idProducto`
+(`fk_idProducto`);
 
 --
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
-  ADD PRIMARY KEY (`idRol`);
+ADD PRIMARY KEY
+(`idRol`);
 
 --
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`idUsuario`),
-  ADD KEY `fk_idRol` (`fk_idRol`);
+ADD PRIMARY KEY
+(`idUsuario`),
+ADD KEY `fk_idRol`
+(`fk_idRol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -231,43 +302,50 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCategoria` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCita` int
+(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `idNoticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idNoticia` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idProducto` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idProyecto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProyecto` int
+(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idRol` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idUsuario` int
+(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -277,35 +355,55 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `citas`
 --
 ALTER TABLE `citas`
-  ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`fk_idUsuario`) REFERENCES `usuarios` (`idUsuario`),
-  ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`fk_idProyecto`) REFERENCES `proyectos` (`idProyecto`);
+ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY
+(`fk_idUsuario`) REFERENCES `usuarios`
+(`idUsuario`),
+ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY
+(`fk_idProyecto`) REFERENCES `proyectos`
+(`idProyecto`);
 
 --
 -- Filtros para la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  ADD CONSTRAINT `noticias_ibfk_1` FOREIGN KEY (`fk_idCategoria`) REFERENCES `categorias` (`idCategoria`);
+ADD CONSTRAINT `noticias_ibfk_1` FOREIGN KEY
+(`fk_idCategoria`) REFERENCES `categorias`
+(`idCategoria`);
 
 --
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `fk_idcategoria` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`);
+ADD CONSTRAINT `fk_idcategoria` FOREIGN KEY
+(`idCategoria`) REFERENCES `categorias`
+(`idCategoria`);
 
 --
 -- Filtros para la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  ADD CONSTRAINT `proyectos_ibfk_1` FOREIGN KEY (`fk_idUsuario`) REFERENCES `usuarios` (`idUsuario`),
-  ADD CONSTRAINT `proyectos_ibfk_2` FOREIGN KEY (`fk_idProducto`) REFERENCES `productos` (`idProducto`);
+ADD CONSTRAINT `proyectos_ibfk_1` FOREIGN KEY
+(`fk_idUsuario`) REFERENCES `usuarios`
+(`idUsuario`),
+ADD CONSTRAINT `proyectos_ibfk_2` FOREIGN KEY
+(`fk_idProducto`) REFERENCES `productos`
+(`idProducto`);
 
 --
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`fk_idRol`) REFERENCES `rol` (`idRol`);
+ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY
+(`fk_idRol`) REFERENCES `rol`
+(`idRol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE zapatilleate.usuarios MODIFY password VARCHAR
+(100);
+UPDATE zapatilleate.usuarios set password = 'da248eeaffa573da8c323c3eb56aaf32ec6ce244e401a24c55f30c907d0bbfb5';
+ALTER TABLE zapatilleate.citas MODIFY fecha Date;
+ALTER TABLE zapatilleate.citas ADD hora Time;

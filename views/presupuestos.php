@@ -1,20 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$bbdd = "zapatilleate";
-$port = 3308;
+    include '../Back/bbdd.php';
 
-// Conexion con la BBDD
-$conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "SELECT * FROM `productos`";
-$result = $conn->query($sql);
-
+    $sql = "SELECT * FROM `productos`";
+    $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>

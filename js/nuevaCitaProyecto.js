@@ -1,5 +1,4 @@
 //crear nueva cita
-
 function validarcita(f) {
     var ok;
     var msg;
@@ -27,9 +26,9 @@ function validarcita(f) {
             "fecha": fecha.split("T")[0],
             "hora": fecha.split("T")[1],
         },
-        url: "../back/crearCita.php",
+        url: "../Back/crearCita.php",
         type: "post",
-        success: function(response) {
+        success: function (response) {
             window.location.reload();
         }
     });
@@ -37,7 +36,6 @@ function validarcita(f) {
 };
 
 //crear nuevo proyecto
-
 function validarproyecto(f) {
     var ok;
     var msg;
@@ -60,9 +58,9 @@ function validarproyecto(f) {
     }
     //Datos de nuevo proyecto
 
-    var color = $('#personalizado1').val();
-    var logo = $('#personalizado2').val();
-    var tipografia = $('#personalizado3').val();
+    var color = $('#personalizado1').prop('checked') ? 1 : 0;
+    var logo = $('#personalizado2').prop('checked') ? 1 : 0;
+    var tipografia = $('#personalizado3').prop('checked') ? 1 : 0;
     var plazo = $('#plazo').val();
     var selectPlazo = $('#selectPlazo').val();
     var total = $('#total').val().replace(" €", "");
@@ -80,7 +78,72 @@ function validarproyecto(f) {
         },
         url: "../back/crearProyecto.php",
         type: "post",
-        success: function(response) {
+        success: function (response) {
+            window.location.reload();
+        }
+    });
+    return true;
+};
+
+//show new project
+function showNewProject() {
+    document.getElementById("nueva-cita").style.display = "none";
+    document.getElementById("nuevo-proyecto").style.display = "block";
+    document.getElementById("editar-cita").style.display = "none";
+}
+
+//show new cita
+function showNewCita() {
+    document.getElementById("nueva-cita").style.display = "block";
+    document.getElementById("nuevo-proyecto").style.display = "none";
+    document.getElementById("editar-cita").style.display = "none";
+}
+
+//show edit cita
+function showEditCita(id, fecha, hora) {
+    var fechaCita = new Date(fecha + " " + hora);
+    var fechaActual = new Date();
+    var diff = fechaCita.getTime() - fechaActual.getTime();
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    if (diffDays < 3) {
+        alert("No puedes editar una cita con menos de 72 horas de antelación");
+    } else {
+        document.getElementById("editDate").value = fecha + "T" + hora;
+        document.getElementById("editId").value = id;
+
+        document.getElementById("nueva-cita").style.display = "none";
+        document.getElementById("nuevo-proyecto").style.display = "none";
+        document.getElementById("editar-cita").style.display = "block";
+    }
+}
+
+//editar cita
+function editarCita(f) {
+    var ok;
+    var msg;
+    msg = '';
+    ok = "si";
+    var citaId = $('#editId').val();
+    var fecha = $('#editDate').val();
+    if (!fecha || fecha == '') {
+        ok = "no";
+        msg = msg + "Debes seleccionar una fecha y una hora.\n"
+    }
+
+    if (ok === 'no') {
+        alert(msg);
+        return false;
+    }
+
+    $.ajax({
+        data: {
+            "idCita": citaId,
+            "fecha": fecha.split("T")[0],
+            "hora": fecha.split("T")[1],
+        },
+        url: "../Back/editarCita.php",
+        type: "post",
+        success: function (response) {
             window.location.reload();
         }
     });

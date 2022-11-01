@@ -1,7 +1,7 @@
 <?php
     include '../../Back/bbdd.php';
 
-    $sql = "SELECT noticias.*, categorias.nombre FROM `noticias` INNER JOIN `categorias` ON fk_idCategoria = idCategoria order by fecha DESC";
+    $sql = "SELECT productos.*, categorias.nombre as categoria FROM `productos` INNER JOIN `categorias` ON productos.idCategoria = categorias.idCategoria";
     $result = $conn->query($sql);
 ?>
 
@@ -53,31 +53,31 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800 title-with-button">
                         Administracion
-                        <button class="button-new" onclick="goToNuevaNoticia()">Nueva noticia</button>
+                        <button class="button-new" onclick="goToNuevoProducto()">Nuevo producto</button>
                     </h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th>Imagen</th>
                                             <th>Categoria</th>
-                                            <th>Fecha</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th>Imagen</th>
                                             <th>Categoria</th>
-                                            <th>Fecha</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -85,11 +85,11 @@
                                             //Comprobar datos y mostrarlos
                                             if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
-                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/noticia-detalle.php?id=".$row["idNoticia"]."'>
-                                                        <td>".$row["autor"]."</td>
-                                                        <td>".$row["titulo"]."</td>
+                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/producto-detalle.php?id=".$row["idProducto"]."'>
                                                         <td>".$row["nombre"]."</td>
-                                                        <td>".$row["fecha"]."</td>
+                                                        <td>".$row["precio"]."</td>
+                                                        <td>".$row["imagen"]."</td>
+                                                        <td>".$row["categoria"]."</td>
                                                     </tr>";
                                                 }
                                             } else {
@@ -132,7 +132,7 @@
     <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/js/admin/noticias.js"></script>
+    <script src="/zapatilleate/js/admin/productos.js"></script>
 </body>
 
 </html>

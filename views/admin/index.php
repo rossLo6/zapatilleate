@@ -1,16 +1,5 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $bbdd = "zapatilleate";
-    $port = 3308;
-
-    // Conexion con la BBDD
-    $conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include '../../Back/bbdd.php';
 
     $sqlCountCitas = "SELECT Count(idCita) as total FROM `citas` WHERE fecha >= CURDATE();";
     $sqlCountProyectosFuturos = "SELECT Count(idProyecto) as total FROM `proyectos` WHERE entrega >= CURDATE();";
@@ -40,7 +29,7 @@
     <meta name="revisit-after" content="2 days" />
     <meta name="category" content="Trabajo obligatorio" />
     <!-- Llamada icono-->
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/zapatilleate/favicon.ico" />
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Declaración de fichero de estilos -->

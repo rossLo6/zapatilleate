@@ -1,21 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$bbdd = "zapatilleate";
-$port = 3308;
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-$id=$_GET['id'];
-$sql = "SELECT * FROM `noticias` WHERE idNoticia=".$id;
-$result = $conn->query($sql);
-$new = $result->fetch_assoc()
+    include '../Back/bbdd.php';
+    $id=$_GET['id'];
+    $sql = "SELECT * FROM `noticias` WHERE idNoticia=".$id;
+    $result = $conn->query($sql);
+    $new = $result->fetch_assoc()
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,20 +1,12 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $bbdd = "zapatilleate";
-    $port = 3308;
+    include '../../Back/bbdd.php';
 
-    // Conexion con la BBDD
-    $conn = new mysqli($servername, $username, $password, $bbdd, $port);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT noticias.*, categorias.nombre FROM `noticias` INNER JOIN `categorias` ON fk_idCategoria = idCategoria and idNoticia = ".$_GET["id"];
+    $sql = "SELECT * FROM `noticias` WHERE idNoticia = ".$_GET["id"];
     $result = $conn->query($sql);
-    $noticia = $result->fetch_assoc()
+    $noticia = $result->fetch_assoc();
+
+    $sql2 = "SELECT * FROM `categorias`";
+    $result2 = $conn->query($sql2);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +21,7 @@
     <meta name="revisit-after" content="2 days" />
     <meta name="category" content="Trabajo obligatorio" />
     <!-- Llamada icono-->
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/zapatilleate/favicon.ico" />
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Declaración de fichero de estilos -->
@@ -71,18 +63,37 @@
                             <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
                         </div>
                         <div class="card-body">
-                            Pintar formulario bonito
-                            <form id="form2" onsubmit="return validar(this)">
-                                <label for="autor" class="label">Autor: </label>
-                                <input id="autor" name="autor" type="text" value="<?php echo $noticia["autor"]?>" required/>
-                                <label for="titulo" class="label">Titulo: </label>
-                                <input id="titulo" name="titulo" type="text" value="<?php echo $noticia["titulo"]?>" required/>
-                                <label for="cuerpo" class="label">Cuerpo: </label>
-                                <input id="cuerpo" name="cuerpo" type="text" value="<?php echo $noticia["cuerpo"]?>" required/>
-                                <label for="imagen" class="label">Imagen: </label>
-                                <input id="imagen" name="imagen" type="text" value="<?php echo $noticia["imagen"]?>" required/>
-                                <label for="nombre" class="label">Titulo: </label>
-                                <input id="nombre" name="nombre" type="text" value="<?php echo $noticia["nombre"]?>" required/>
+                            <form class="admin-form" onsubmit="return updateNoticia(this)">
+                                <input id="noticia_id" name="noticia_id" type="hidden" value="<?php echo $noticia["idNoticia"]; ?>" required/>
+                                <div>
+                                    <label for="autor" class="label">Autor: </label>
+                                    <input id="autor" name="autor" type="text" value="<?php echo $noticia["autor"]?>" required/>
+                                </div>
+                                <div>
+                                    <label for="titulo" class="label">Titulo: </label>
+                                    <input id="titulo" name="titulo" type="text" value="<?php echo $noticia["titulo"]?>" required/>
+                                </div>
+                                <div>
+                                    <label for="cuerpo" class="label">Cuerpo: </label>
+                                    <input id="cuerpo" name="cuerpo" type="text" value="<?php echo $noticia["cuerpo"]?>" required/>
+                                </div>
+                                <div>
+                                    <label for="imagen" class="label">Imagen: </label>
+                                    <input id="imagen" name="imagen" type="text" value="<?php echo $noticia["imagen"]?>" required/>
+                                </div>
+                                <div>
+                                    <label for="categoria" class="label">Categoria: </label>
+                                    <select name="categoria" id="categoria" required>
+                                        <?php
+                                            if ($result2->num_rows > 0) {
+                                                while($row = $result2->fetch_assoc()) {
+                                                    echo "<option value='". $row['idCategoria']."' ".($row['idCategoria'] == $noticia["fk_idCategoria"] ? "selected='selected'" : "")."'>". $row['nombre']."</option>";
+                                                }
+                                            }
+                                            $conn->close();
+                                        ?>
+                                    </select>
+                                </div>
                                 <input type="submit"/>
                             </form>
                         </div>
@@ -117,7 +128,7 @@
     <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/vendor/chart.js/Chart.min.js"></script>
+    <script src="/zapatilleate/js/admin/noticias.js"></script>
 </body>
 
 </html>

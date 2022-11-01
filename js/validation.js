@@ -110,9 +110,9 @@ function validar(f) {
     //Datos del proyecto
     var nombreProyecto = $('#nombreProyecto').val();
     var proyecto = $('#elijeProducto').val();
-    var color = $('#personalizado1').val();
-    var logo = $('#personalizado2').val();
-    var tipografia = $('#personalizado3').val();
+    var color = $('#personalizado1').prop('checked') ? 1 : 0;
+    var logo = $('#personalizado2').prop('checked') ? 1 : 0;
+    var tipografia = $('#personalizado3').prop('checked') ? 1 : 0;
     var cantidad = $('#plazo').val();
     var medida = $('#selectPlazo').val();
     var total = $('#total').val().replace(" €", "");
@@ -142,7 +142,7 @@ function validar(f) {
 
         url: "../back/crearUsuario.php",
         type: "post",
-        success: function(response) {
+        success: function (response) {
             console.log(response);
         }
     });

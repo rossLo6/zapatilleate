@@ -37,12 +37,12 @@ function loginForm(f) {
             "password": password
         },
 
-        url: "http://localhost/zapatilleate/Back/login.php",
+        url: "/zapatilleate/Back/login.php",
         type: "post",
-        success: function(response) {
-            window.location.href = '/zapatilleate/views/citas.php';
+        success: function (response) {
+            location.reload();
         },
-        error: function(response) {
+        error: function (response) {
             alert("usuario o contraseña incorrectos");
         }
     });
@@ -53,9 +53,9 @@ function logoutForm(f) {
     $.ajax({
         data: {},
 
-        url: "http://localhost/zapatilleate/Back/logout.php",
+        url: "/zapatilleate/Back/logout.php",
         type: "post",
-        success: function(response) {
+        success: function (response) {
             location.reload();
         }
     });

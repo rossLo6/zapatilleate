@@ -1,7 +1,7 @@
 <?php
     include '../../Back/bbdd.php';
 
-    $sql = "SELECT noticias.*, categorias.nombre FROM `noticias` INNER JOIN `categorias` ON fk_idCategoria = idCategoria order by fecha DESC";
+    $sql = "SELECT usuarios.*, rol.nombre as rol_nombre FROM `usuarios` INNER JOIN `rol` ON fk_idRol = idRol";
     $result = $conn->query($sql);
 ?>
 
@@ -51,33 +51,32 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 title-with-button">
-                        Administracion
-                        <button class="button-new" onclick="goToNuevaNoticia()">Nueva noticia</button>
-                    </h1>
+                    <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
-                                            <th>Categoria</th>
-                                            <th>Fecha</th>
+                                            <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Email</th>
+                                            <th>Teléfono</th>
+                                            <th>Rol</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
-                                            <th>Categoria</th>
-                                            <th>Fecha</th>
+                                        <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Email</th>
+                                            <th>Teléfono</th>
+                                            <th>Rol</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -85,11 +84,12 @@
                                             //Comprobar datos y mostrarlos
                                             if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
-                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/noticia-detalle.php?id=".$row["idNoticia"]."'>
-                                                        <td>".$row["autor"]."</td>
-                                                        <td>".$row["titulo"]."</td>
+                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/usuario-detalle.php?id=".$row["idUsuario"]."'>
                                                         <td>".$row["nombre"]."</td>
-                                                        <td>".$row["fecha"]."</td>
+                                                        <td>".$row["apellido1"]." ".$row["apellido2"]."</td>
+                                                        <td>".$row["email"]."</td>
+                                                        <td>".$row["telefono"]."</td>
+                                                        <td>".$row["rol_nombre"]."</td>
                                                     </tr>";
                                                 }
                                             } else {
@@ -132,7 +132,15 @@
     <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/js/admin/noticias.js"></script>
+    <script src="/zapatilleate/vendor/chart.js/Chart.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
 </body>
 
 </html>
