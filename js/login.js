@@ -43,10 +43,10 @@ function loginForm(f) {
             location.reload();
         },
         error: function (response) {
-            alert("usuario o contraseña incorrectos");
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
-    return true;
+    return false;
 }
 
 function logoutForm(f) {
@@ -57,7 +57,10 @@ function logoutForm(f) {
         type: "post",
         success: function (response) {
             location.reload();
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
-    return true;
+    return false;
 }

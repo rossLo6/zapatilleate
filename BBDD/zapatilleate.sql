@@ -407,3 +407,84 @@ ALTER TABLE zapatilleate.usuarios MODIFY password VARCHAR
 UPDATE zapatilleate.usuarios set password = 'da248eeaffa573da8c323c3eb56aaf32ec6ce244e401a24c55f30c907d0bbfb5';
 ALTER TABLE zapatilleate.citas MODIFY fecha Date;
 ALTER TABLE zapatilleate.citas ADD hora Time;
+ALTER TABLE usuarios RENAME users_data;
+ALTER TABLE users_data ADD direccion VARCHAR(200);
+ALTER TABLE users_data ADD sexo VARCHAR(50);
+ALTER TABLE users_data ADD apellidos VARCHAR(200);
+ALTER TABLE users_data drop apellido1;
+ALTER TABLE users_data drop apellido2;
+
+CREATE TABLE `zapatilleate`.`users_login`
+(
+  `idLogin` INT NOT NULL AUTO_INCREMENT,
+  `fk_idUsuario` INT NOT NULL,
+  `usuario` VARCHAR
+(100) NOT NULL,
+  `password` VARCHAR
+(100) NOT NULL,
+  `fk_idRol` INT NOT NULL,
+  PRIMARY KEY
+(`idLogin`),
+  UNIQUE INDEX `idLogin_UNIQUE`
+(`idLogin` ASC) VISIBLE,
+  UNIQUE INDEX `idUsuario_UNIQUE`
+(`fk_idUsuario` ASC) VISIBLE,
+  UNIQUE INDEX `usuario_UNIQUE`
+(`usuario` ASC) VISIBLE,
+  INDEX `fk_idRol_idx`
+(`fk_idRol` ASC) VISIBLE,
+  CONSTRAINT `fk_idUsuario`
+    FOREIGN KEY
+(`fk_idUsuario`)
+    REFERENCES `zapatilleate`.`users_data`
+(`idUsuario`)
+    ON
+DELETE NO ACTION
+    ON
+UPDATE NO ACTION,
+  CONSTRAINT `fk_idRol`
+    FOREIGN KEY
+(`fk_idRol`)
+    REFERENCES `zapatilleate`.`rol`
+(`idRol`)
+    ON
+DELETE NO ACTION
+    ON
+UPDATE NO ACTION);
+
+INSERT INTO `users_login` (
+  `
+fk_idUsuario`,
+`fk_idRol
+`,
+  `usuario`,
+  `password`
+) VALUES
+(1, 1, 'rosanaAdmin', 'da248eeaffa573da8c323c3eb56aaf32ec6ce244e401a24c55f30c907d0bbfb5'),
+(2, 2, 'patatoide', 'da248eeaffa573da8c323c3eb56aaf32ec6ce244e401a24c55f30c907d0bbfb5');
+
+
+ALTER TABLE users_data drop usuario;
+ALTER TABLE users_data drop password;
+ALTER TABLE users_data DROP CONSTRAINT users_data_ibfk_1;
+ALTER TABLE users_data DROP fk_idRol;
+ALTER TABLE citas ADD motivo VARCHAR(200);
+
+
+ALTER TABLE noticias drop autor;
+ALTER TABLE `zapatilleate`.`noticias`
+ADD COLUMN `fk_idUsuario` INT NOT NULL AFTER `fecha`,
+ADD INDEX `fk_idUsuario_idx`
+(`fk_idUsuario` ASC) VISIBLE;
+;
+ALTER TABLE `zapatilleate`.`noticias`
+ADD CONSTRAINT `noticias_ibfk_2`
+  FOREIGN KEY
+(`fk_idUsuario`)
+  REFERENCES `zapatilleate`.`users_data`
+(`idUsuario`)
+  ON
+DELETE NO ACTION
+  ON
+UPDATE NO ACTION;
+

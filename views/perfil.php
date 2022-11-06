@@ -6,7 +6,7 @@
 
     include '../Back/bbdd.php';
 
-    $sql = "SELECT * FROM `usuarios` WHERE idUsuario = ".$_COOKIE['user_id'];
+    $sql = "SELECT * FROM `users_data` WHERE idUsuario = ".$_COOKIE['user_id'];
     $result = $conn->query($sql);
 
     $user = $result->fetch_assoc();
@@ -48,16 +48,25 @@
             <fieldset>
                 <label for="nombre" class="label">Nombre:</label>
                 <input id="nombre" name="nombre" type="text" class="cuadros" value="<?php echo $user["nombre"]; ?>" required/>
-                <label for="apellido_1" class="label">Primer apellido:</label>
-                <input id="apellido_1" name="apellido_1" type="text" class="cuadros" value="<?php echo $user["apellido1"]; ?>" required/>
-                <label for="apellido_2" class="label">Segundo apellido:</label>
-                <input id="apellido_2" name="apellido_2" type="text" class="cuadros" value="<?php echo $user["apellido2"]; ?>" required/>
+                <label for="apellidos" class="label">Apellidos:</label>
+                <input id="apellidos" name="apellidos" type="text" class="cuadros" value="<?php echo $user["apellidos"]; ?>" required/>
                 <label for="email" class="label">Email:</label>
                 <input id="email" name="email" type="email" class="cuadros" value="<?php echo $user["email"]; ?>" required/>
                 <label for="f_nacimiento" class="label">Fecha de Nacimiento:</label>
                 <input id="f_nacimiento" type="date" name="f_nacimiento" class="cuadros" value="<?php echo $user["fnac"]; ?>"/>
                 <label for="telefono" class="label">Telefono:</label>
                 <input id="telefono" name="telefono" type="number" class="cuadros" value="<?php echo $user["telefono"]; ?>"/>
+                <label for="direccion" class="label">Direccion:</label>
+                <input id="direccion" name="direccion" type="text" class="cuadros" value="<?php echo $user["direccion"]; ?>" required/>
+                <label for="sexo" class="label">Sexo:</label>
+                <select name="sexo" id="sexo" class="cuadros">
+                    <option value="femenino" <?php echo ($user['sexo'] == 'femenino' ? "selected='selected'" : "") ?>>Femenino</option>
+                    <option value="masculino" <?php echo ($user['sexo'] == 'masculino' ? "selected='selected'" : "") ?>>Masculino</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <label for="password" class="label">Contraseña:</label>
+                <input id="password" name="password" type="password" class="cuadros"/>
             </fieldset>
             <!-- envio formulario -->
             <fieldset>

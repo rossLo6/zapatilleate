@@ -3,10 +3,10 @@
         header("Location: /zapatilleate/index.php");
         exit();
     }
-    
-    include '../../Back/bbdd.php';
 
-    $sql = "SELECT productos.*, categorias.nombre as categoria FROM `productos` INNER JOIN `categorias` ON productos.idCategoria = categorias.idCategoria";
+    include '../../Back/bbdd.php';
+    
+    $sql = "SELECT * FROM `proyectos` WHERE fk_idUsuario = ".$_GET["id"];
     $result = $conn->query($sql);
 ?>
 
@@ -36,9 +36,10 @@
 </head>
 
 <body>
-    <!-- header -->
+    <!-- Sidebar -->
     <?php include '../header.php';?>
-    <!-- End of header -->
+    <!-- End of Sidebar -->
+
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -48,56 +49,40 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 title-with-button">
-                        Administracion
-                        <button class="button-new" onclick="goToNuevoProducto()">Nuevo producto</button>
-                    </h1>
+                    <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Cita</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Precio</th>
-                                            <th>Imagen</th>
-                                            <th>Categoria</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Precio</th>
-                                            <th>Imagen</th>
-                                            <th>Categoria</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
+                            <form class="admin-form" onsubmit="return crearCita(this)">
+                                <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_GET["id"]; ?>"/>
+                                <div>
+                                    <label for="idProyecto" class="label">Proyecto:</label>
+                                    <select name="idProyecto" id="idProyecto" class="cuadros" required>
                                         <?php
-                                            //Comprobar datos y mostrarlos
                                             if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
-                                                    echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/producto-detalle.php?id=".$row["idProducto"]."'>
-                                                        <td>".$row["nombre"]."</td>
-                                                        <td>".$row["precio"]."</td>
-                                                        <td>".$row["imagen"]."</td>
-                                                        <td>".$row["categoria"]."</td>
-                                                    </tr>";
+                                                    echo "<option value='". $row['idProyecto']."'>". $row['nombre']."</option>";
                                                 }
-                                            } else {
-                                                echo "<tr>0 resultados</tr>";
                                             }
-                                            $conn->close();
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="fecha" class="label">Fecha:</label>
+                                    <input id="fecha" type="datetime-local" name="fecha" class="cuadros" value="<?php echo ($cita["fecha"].'T'.$cita["hora"]) ?>" required/>
+                                </div>
+                                <div>
+                                    <label for="motivo" class="label">Motivo: </label>
+                                    <textarea id="motivo" name="motivo" class="cuadros" cols="30" rows="5" maxlength="300" placeholder="Escribe aquí tus dudas"></textarea>
+                                </div>
+                                <input type="submit"/>
+                            </form>
                         </div>
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -116,9 +101,13 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="/zapatilleate/vendor/jquery/jquery.min.js"></script>
+    <script src="/zapatilleate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/js/admin/productos.js"></script>
+    <script src="/zapatilleate/js/admin/citas.js"></script>
 </body>
 
 </html>

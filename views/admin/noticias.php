@@ -1,7 +1,12 @@
 <?php
+    if (!isset($_COOKIE['user_rol']) && $_COOKIE['user_rol'] != 1) {
+        header("Location: /zapatilleate/index.php");
+        exit();
+    }
+    
     include '../../Back/bbdd.php';
 
-    $sql = "SELECT noticias.*, categorias.nombre FROM `noticias` INNER JOIN `categorias` ON fk_idCategoria = idCategoria order by fecha DESC";
+    $sql = "SELECT noticias.*, users_data.nombre as autor, categorias.nombre as categoria  FROM `noticias` INNER JOIN `users_data` on noticias.fk_idUsuario = users_data.idUsuario INNER JOIN `categorias` ON categorias.idCategoria = noticias.fk_idCategoria  order by fecha DESC";
     $result = $conn->query($sql);
 ?>
 
@@ -25,37 +30,29 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>Trabajo obligatorio - Zapatilleate</title>
 </head>
 
 <body>
+    <!-- header -->
+    <?php include '../header.php';?>
+    <!-- End of header -->
+
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
-        <?php include 'sidebar.php';?>
-        <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
-                <!-- Topbar -->
-                <?php include 'topbar.php';?>
-                <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800 title-with-button">
                         Administracion
                         <button class="button-new" onclick="goToNuevaNoticia()">Nueva noticia</button>
                     </h1>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -66,18 +63,20 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
                                             <th>Categoria</th>
+                                            <th>Titulo</th>
+                                            <th>Autor</th>
                                             <th>Fecha</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Marca</th>
-                                            <th>Titulo</th>
                                             <th>Categoria</th>
+                                            <th>Titulo</th>
+                                            <th>Autor</th>
                                             <th>Fecha</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -86,10 +85,11 @@
                                             if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
                                                     echo "<tr  class='clickable-row' data-href='/zapatilleate/views/admin/noticia-detalle.php?id=".$row["idNoticia"]."'>
-                                                        <td>".$row["autor"]."</td>
+                                                        <td>".$row["categoria"]."</td>
                                                         <td>".$row["titulo"]."</td>
-                                                        <td>".$row["nombre"]."</td>
+                                                        <td>".$row["autor"]."</td>
                                                         <td>".$row["fecha"]."</td>
+                                                        <td><button class='button-delete' onclick='deleteNoticia(".$row["idNoticia"].")'>Eliminar</button></td>
                                                     </tr>";
                                                 }
                                             } else {
@@ -102,23 +102,17 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <?php include 'footer.php';?>
-            <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
-
+    <!-- Footer -->
+    <?php include '../footer.php';?>
+    <!-- End of Footer -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -126,10 +120,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="/zapatilleate/vendor/jquery/jquery.min.js"></script>
-    <script src="/zapatilleate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
     <script src="/zapatilleate/js/admin/noticias.js"></script>

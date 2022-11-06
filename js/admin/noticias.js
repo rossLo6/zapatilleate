@@ -7,7 +7,6 @@ jQuery(document).ready(function ($) {
 function updateNoticia() {
     //Datos de noticia
     var noticia_id = $('#noticia_id').val();
-    var autor = $('#autor').val();
     var titulo = $('#titulo').val();
     var cuerpo = $('#cuerpo').val();
     var imagen = $('#imagen').val();
@@ -16,7 +15,6 @@ function updateNoticia() {
     $.ajax({
         data: {
             "noticia_id": noticia_id,
-            "autor": autor,
             "titulo": titulo,
             "cuerpo": cuerpo,
             "imagen": imagen,
@@ -25,17 +23,18 @@ function updateNoticia() {
         url: "../../back/admin/actualizarNoticia.php",
         type: "post",
         success: function (response) {
-            console.log(response);
             window.location.href = "/zapatilleate/views/admin/noticia-detalle.php?id=" + noticia_id;
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
 
-    return true;
+    return false;
 }
 
 function crearNoticia() {
     //Datos de noticia
-    var autor = $('#autor').val();
     var titulo = $('#titulo').val();
     var cuerpo = $('#cuerpo').val();
     var imagen = $('#imagen').val();
@@ -43,7 +42,6 @@ function crearNoticia() {
 
     $.ajax({
         data: {
-            "autor": autor,
             "titulo": titulo,
             "cuerpo": cuerpo,
             "imagen": imagen,
@@ -52,12 +50,32 @@ function crearNoticia() {
         url: "../../back/admin/crearNoticia.php",
         type: "post",
         success: function (response) {
-            console.log(response);
             window.location.href = "/zapatilleate/views/admin/noticias.php";
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
 
-    return true;
+    return false;
+}
+
+function deleteNoticia(idNoticia) {
+    $.ajax({
+        data: {
+            "idNoticia": idNoticia,
+        },
+        url: "../../back/admin/eliminarNoticia.php",
+        type: "post",
+        success: function (response) {
+            console.log(response);
+            window.location.href = "/zapatilleate/views/admin/noticias.php";
+        },
+        error: function (response) {
+            console.log(response);
+            alert(response.responseText.split("Error: ")[1]);
+        }
+    });
 }
 
 function goToNuevaNoticia() {

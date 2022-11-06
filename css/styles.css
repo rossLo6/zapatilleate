@@ -87,17 +87,17 @@ header {
 
 #header-nav {
     overflow: hidden;
-    width: 445px;
-    padding-top: 28px;
+    width: 100%;
     float: left;
 }
 
 #header-nav ul {
-    float: right;
+    float: left;
     display: block;
-    margin-top: 0%;
+    margin-bottom: 0px;
     margin-right: 0px;
     padding: 0px;
+    margin-top: 0px;
 }
 
 #header-nav ul li {
@@ -297,6 +297,14 @@ form {
     margin: 0 auto
 }
 
+#register-form {
+    padding-top: 10px;
+}
+
+#register-form a {
+    margin-left: 13px;
+}
+
 .label {
     font-size: large;
     font-weight: bold;
@@ -422,4 +430,67 @@ footer {
 footer p,
 footer a {
     font-size: 15px;
+}
+
+.clickable-row:hover {
+    cursor: pointer;
+    background-color: var(--color-3);
+}
+
+.button-new {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 0px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: right;
+}
+
+h6 {
+    line-height: 40px;
+}
+
+.title-with-button {
+    padding-bottom: 20px;
+    line-height: 50px;
+}
+
+.admin-form {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.admin-form label {
+    width: 20%;
+    text-align: right;
+}
+
+.admin-form input {
+    width: 79%;
+}
+
+.admin-form input[type="checkbox"] {
+    width: 23px;
+}
+
+.admin-form textarea {
+    width: 79%;
+}
+
+.admin-form select {
+    width: 79%;
+    padding: 2px 0;
+    height: 40px;
+}
+
+.admin-form input[type="submit"] {
+    width: 150px;
+    float: right;
+    margin-right: 11px;
 }

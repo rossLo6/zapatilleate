@@ -1,13 +1,15 @@
 <?php
+
     if (!isset($_COOKIE['user_rol']) && $_COOKIE['user_rol'] != 1) {
         header("Location: /zapatilleate/index.php");
         exit();
     }
-    
-    include '../../Back/bbdd.php';
 
-    $sql = "SELECT * FROM `categorias`";
+    include '../../Back/bbdd.php';
+    
+    $sql = "SELECT citas.*, proyectos.nombre as proyecto FROM `citas` INNER JOIN `proyectos` ON fk_idProyecto = idProyecto and idCita = ".$_GET["id"];
     $result = $conn->query($sql);
+    $cita = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +38,10 @@
 </head>
 
 <body>
-    <!-- header -->
+    <!-- Header -->
     <?php include '../header.php';?>
-    <!-- End of header -->
+    <!-- End of Header -->
+
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -52,35 +55,22 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Cita</h6>
                         </div>
                         <div class="card-body">
-                            <form class="admin-form" onsubmit="return crearNoticia(this)">
+                            <form class="admin-form" onsubmit="return updateCita(this)">
+                                <input id="idCita" name="idCita" type="hidden" value="<?php echo $cita["idCita"]; ?>"/>
                                 <div>
-                                    <label for="titulo" class="label">Titulo: </label>
-                                    <input id="titulo" class="cuadros" name="titulo" type="text" required/>
+                                    <label for="proyecto" class="label">Nombre Proyecto:</label>
+                                    <input id="proyecto" name="proyecto" type="text" class="cuadros" value="<?php echo $cita["proyecto"]; ?>" disabled/>
                                 </div>
                                 <div>
-                                    <label for="cuerpo" class="label">Cuerpo: </label>
-                                    <input id="cuerpo" class="cuadros" name="cuerpo" type="text" required/>
+                                    <label for="fecha" class="label">Fecha:</label>
+                                    <input id="fecha" type="datetime-local" name="fecha" class="cuadros" value="<?php echo ($cita["fecha"].'T'.$cita["hora"]) ?>" required/>
                                 </div>
                                 <div>
-                                    <label for="imagen" class="label">Imagen: </label>
-                                    <input id="imagen" class="cuadros" name="imagen" type="text" required/>
-                                </div>
-                                <div>
-                                    <label for="categoria" class="label">Categoria: </label>
-                                    <select class="cuadros" name="categoria" id="categoria" required>
-                                        <option value="" disabled selected>Selecciona una opción</option>
-                                        <?php
-                                            if ($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo "<option value='". $row['idCategoria']."'>". $row['nombre']."</option>";
-                                                }
-                                            }
-                                            $conn->close();
-                                        ?>
-                                    </select>
+                                    <label for="motivo" class="label">Motivo:</label>
+                                    <textarea id="motivo" name="motivo" class="cuadros" cols="30" rows="5" maxlength="300" placeholder="Escribe aquí tus dudas"><?php echo ($cita["motivo"]) ?></textarea>
                                 </div>
                                 <input type="submit"/>
                             </form>
@@ -106,7 +96,7 @@
     <script src="/zapatilleate/vendor/jquery/jquery.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/js/admin/noticias.js"></script>
+    <script src="/zapatilleate/js/admin/citas.js"></script>
 </body>
 
 </html>

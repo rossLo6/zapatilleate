@@ -1,4 +1,9 @@
 <?php
+    if (!isset($_COOKIE['user_rol']) && $_COOKIE['user_rol'] != 1) {
+        header("Location: /zapatilleate/index.php");
+        exit();
+    }
+    
     include '../../Back/bbdd.php';
 
     $sql = "SELECT * FROM `categorias`";
@@ -25,34 +30,25 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>Trabajo obligatorio - Zapatilleate</title>
 </head>
 
 <body>
+    <!-- header -->
+    <?php include '../header.php';?>
+    <!-- End of header -->
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
-        <?php include 'sidebar.php';?>
-        <!-- End of Sidebar -->
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
-                <!-- Topbar -->
-                <?php include 'topbar.php';?>
-                <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -62,19 +58,19 @@
                             <form class="admin-form" onsubmit="return crearProducto(this)">
                                 <div>
                                     <label for="nombre" class="label">Nombre: </label>
-                                    <input id="nombre" name="nombre" type="text" required/>
+                                    <input id="nombre" class="cuadros" name="nombre" type="text" required/>
                                 </div>
                                 <div>
                                     <label for="precio" class="label">Precio: </label>
-                                    <input id="precio" name="precio" type="text" required/>
+                                    <input id="precio" class="cuadros" name="precio" type="text" required/>
                                 </div>
                                 <div>
                                     <label for="imagen" class="label">Imagen: </label>
-                                    <input id="imagen" name="imagen" type="text"/>
+                                    <input id="imagen" class="cuadros" name="imagen" type="text"/>
                                 </div>
                                 <div>
                                     <label for="categoria" class="label">Categoria: </label>
-                                    <select name="categoria" id="categoria" required>
+                                    <select class="cuadros" name="categoria" id="categoria" required>
                                         <option value="" disabled selected>Selecciona una opción</option>
                                         <?php
                                             if ($result->num_rows > 0) {
@@ -90,23 +86,17 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <?php include 'footer.php';?>
-            <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
-
+    <!-- Footer -->
+    <?php include '../footer.php';?>
+    <!-- End of Footer -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -114,10 +104,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="/zapatilleate/vendor/jquery/jquery.min.js"></script>
-    <script src="/zapatilleate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/zapatilleate/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Page level plugins -->
     <script src="/zapatilleate/js/admin/productos.js"></script>

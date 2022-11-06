@@ -60,10 +60,10 @@ function validar(f) {
         }
     }
     //Apellidos
-    var apellidos = document.getElementById("apellido1").value;
+    var apellidos = document.getElementById("apellidos").value;
     if (!apellidos || apellidos == '') {
         ok = "no";
-        msg = msg + "El campo 'Primer apellido' no puede estar vacío.\n"
+        msg = msg + "El campo 'Apellidos' no puede estar vacío.\n"
     } else {
         if (!validarLetras(apellidos)) {
             ok = 'no'
@@ -101,11 +101,12 @@ function validar(f) {
     var usuario = $('#user').val();
     var password = $('#pass').val();
     var nombre = $('#name').val();
-    var apellido1 = $('#apellido1').val();
-    var apellido2 = $('#apellido2').val();
+    var apellidos = $('#apellidos').val();
     var email = $('#email').val();
     var fnac = $('#fnac').val();
     var telefono = $('#telefono').val();
+    var direccion = $('#direccion').val();
+    var sexo = $('#sexo').val();
 
     //Datos del proyecto
     var nombreProyecto = $('#nombreProyecto').val();
@@ -116,6 +117,7 @@ function validar(f) {
     var cantidad = $('#plazo').val();
     var medida = $('#selectPlazo').val();
     var total = $('#total').val().replace(" €", "");
+    var motivo = $('#motivo').val();
 
 
 
@@ -126,11 +128,12 @@ function validar(f) {
             "usuario": usuario,
             "password": password,
             "nombre": nombre,
-            "apellido1": apellido1,
-            "apellido2": apellido2,
+            "apellidos": apellidos,
             "email": email,
             "telefono": telefono,
             "fnac": fnac,
+            "direccion": direccion,
+            "sexo": sexo,
             "proyecto": proyecto,
             "color": color,
             "logo": logo,
@@ -138,15 +141,19 @@ function validar(f) {
             "cantidad": cantidad,
             "medida": medida,
             "total": total,
+            "motivo": motivo
         },
 
         url: "../back/crearUsuario.php",
         type: "post",
         success: function (response) {
-            console.log(response);
+            window.location.href = "/zapatilleate/views/login.php";
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
-    return true;
+    return false;
 
 
 }

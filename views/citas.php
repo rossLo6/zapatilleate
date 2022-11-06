@@ -1,5 +1,4 @@
 <?php
-
     if(!isset($_COOKIE['user_id'])) {
         header("Location: /zapatilleate/index.php");
         exit();
@@ -61,7 +60,9 @@
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Proyecto</th>
+                    <th>Motivo</th>
                     <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
                 <?php
                     //Comprobar datos y mostrarlos
@@ -71,7 +72,17 @@
                             echo "<td>". $row["fecha"]."</td>";
                             echo "<td>". $row["hora"]."</td>";
                             echo "<td>". $row["nombre"]."</td>";
-                            echo "<td><button onclick=\"showEditCita(". $row["idCita"].",'". $row["fecha"]."','". $row["hora"]."')\">Editar</button></td>";
+                            echo "<td>". $row["motivo"]."</td>";
+                            if (strtotime($row["fecha"]) > strtotime(date("Y-m-d"))) {
+                                echo "<td><button onclick=\"showEditCita(". $row["idCita"].",'". $row["fecha"]."','". $row["hora"]."', '". $row["motivo"]."')\">Editar</button></td>";
+                            } else {
+                                echo "<td></td>";
+                            }
+                            if (strtotime($row["fecha"]) > strtotime(date("Y-m-d"))) {
+                                echo "<td><button onclick=\"deleteCita(". $row["idCita"].")\">Eliminar</button></td>";
+                            } else {
+                                echo "<td></td>";
+                            }
                             echo "</tr>";
                         }
                     } else {
@@ -85,23 +96,31 @@
             <h2>Pedir nueva cita:</h2>
             <form id="form1" onsubmit="return validarcita(this)">
                 <fieldset>
-                    <label for="citaproyecto" class="label">Selecciona el proyecto y la fecha y hora para tu nueva cita:</label>
-                    <select name="nuevacita" id="citaproyecto" class="cuadros">
-                        <?php
-                            if ($result2->num_rows > 0) {
-                                while($row = $result2->fetch_assoc()) {
-                                    echo "<option value='". $row['idProyecto']."'>". $row['nombre']."</option>";
+                    <div>
+                        <label for="citaproyecto" class="label">Selecciona el proyecto:</label>
+                        <select name="citaproyecto" id="citaproyecto" class="cuadros">
+                            <?php
+                                if ($result2->num_rows > 0) {
+                                    while($row = $result2->fetch_assoc()) {
+                                        echo "<option value='". $row['idProyecto']."'>". $row['nombre']."</option>";
+                                    }
                                 }
-                            }
-                        ?>
-                    </select>
-                    <label for="newdate"></label>
-                    <input
-                        id="newdate"
-                        type="datetime-local"
-                        name="nuevafecha"
-                        class="cuadros"
-                    />
+                            ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="newdate" class="label">Selecciona la fecha:</label>
+                        <input
+                            id="newdate"
+                            type="datetime-local"
+                            name="newdate"
+                            class="cuadros"
+                        />
+                    </div>
+                    <div>
+                        <label for="newMotivo" class="label">Motivo:</label>
+                        <textarea id="newMotivo" name="newMotivo" class="cuadros" cols="30" rows="5" maxlength="300" placeholder="Escribe aquí tus dudas"></textarea>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <input type="reset" value="Borrar todo" class="boton" id="boton1" />
@@ -146,6 +165,10 @@
                     </div>
                     <label for="total" class="label">Presupuesto final: </label>
                     <input id="total" name="name" type="text" class="cuadros" disabled />
+                    <div>
+                        <label for="projectMotivo" class="label">Motivo:</label>
+                        <textarea id="projectMotivo" name="projectMotivo" class="cuadros" cols="30" rows="5" maxlength="300" placeholder="Escribe aquí tus dudas"></textarea>
+                    </div>
                 </fieldset>
                 <!-- envio formulario -->
                 <fieldset>
@@ -171,6 +194,8 @@
                         name="nuevafecha"
                         class="cuadros"
                     />
+                    <label for="editMotivo" class="label">Motivo:</label>
+                    <textarea id="editMotivo" name="editMotivo" class="cuadros" cols="30" rows="5" maxlength="300" placeholder="Escribe aquí tus dudas"></textarea>
                 </fieldset>
                 <fieldset>
                     <input type="reset" value="Cancelar" class="boton" id="boton1" />

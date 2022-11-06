@@ -5,15 +5,20 @@
     exit();
   }
   include '../bbdd.php';
-  if (!validate([$_POST['titulo'], $_POST['cuerpo'], $_POST['imagen'], $_POST['categoria'], $_POST['noticia_id']])) {
+  if (!validate([$_POST['fecha'], $_POST['hora'], $_POST['idCita'], $_POST['motivo'], $_POST['idCita']])) {
     $conn->close();
     exit();
   }
 
-  $sql = "UPDATE noticias SET titulo='".$_POST['titulo']."', cuerpo='".$_POST['cuerpo']."', imagen='".$_POST['imagen']."', fk_idCategoria=".$_POST['categoria']." WHERE idNoticia=".$_POST["noticia_id"].";";
+  $sql = "UPDATE citas SET 
+      fecha = '".$_POST['fecha']."',
+      hora = '".$_POST['hora']."',
+      motivo = '".$_POST['motivo']."'
+    WHERE idCita = ".$_POST["idCita"].
+  ";";
 
   if ($conn->query($sql) === TRUE) {
-    echo "Noticia editada";
+    echo "Cita editada";
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }

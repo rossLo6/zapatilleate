@@ -6,7 +6,7 @@
     
     include '../../Back/bbdd.php';
 
-    $sql = "SELECT * FROM `categorias`";
+    $sql = "SELECT * FROM `rol`";
     $result = $conn->query($sql);
 ?>
 
@@ -30,73 +30,98 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
+        <link rel="stylesheet" type="text/css" href="/zapatilleate/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/zapatilleate/css/login.css">
     <title>Trabajo obligatorio - Zapatilleate</title>
 </head>
 
 <body>
-    <!-- header -->
+    <!-- HEADER -->
     <?php include '../header.php';?>
-    <!-- End of header -->
+
     <!-- Page Wrapper -->
     <div id="wrapper">
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
+
             <!-- Main Content -->
             <div id="content">
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Administracion</h1>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Noticias</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Usuario</h6>
                         </div>
                         <div class="card-body">
-                            <form class="admin-form" onsubmit="return crearNoticia(this)">
+                            <form class="admin-form" onsubmit="return createUser(this)">
                                 <div>
-                                    <label for="titulo" class="label">Titulo: </label>
-                                    <input id="titulo" class="cuadros" name="titulo" type="text" required/>
+                                    <label for="nombre" class="label">Nombre:</label>
+                                    <input id="nombre" name="nombre" type="text" class="cuadros" required/>
                                 </div>
                                 <div>
-                                    <label for="cuerpo" class="label">Cuerpo: </label>
-                                    <input id="cuerpo" class="cuadros" name="cuerpo" type="text" required/>
+                                    <label for="apellidos" class="label">Apellidos:</label>
+                                    <input id="apellidos" name="apellidos" type="text" class="cuadros" required/>
                                 </div>
                                 <div>
-                                    <label for="imagen" class="label">Imagen: </label>
-                                    <input id="imagen" class="cuadros" name="imagen" type="text" required/>
+                                    <label for="email" class="label">Email:</label>
+                                    <input id="email" name="email" type="email" class="cuadros" required/>
                                 </div>
                                 <div>
-                                    <label for="categoria" class="label">Categoria: </label>
-                                    <select class="cuadros" name="categoria" id="categoria" required>
+                                    <label for="f_nacimiento" class="label">Fecha de Nacimiento:</label>
+                                    <input id="f_nacimiento" type="date" name="f_nacimiento" class="cuadros"/>
+                                </div>
+                                <div>
+                                    <label for="telefono" class="label">Telefono:</label>
+                                    <input id="telefono" name="telefono" type="number" class="cuadros"/>
+                                </div>
+                                <div>
+                                    <label for="direccion" class="label">Direccion:</label>
+                                    <input id="direccion" name="direccion" type="text" class="cuadros" required/>
+                                </div>
+                                <div>
+                                    <label for="sexo" class="label">Sexo:</label>
+                                    <select name="sexo" id="sexo" class="cuadros">
                                         <option value="" disabled selected>Selecciona una opción</option>
-                                        <?php
-                                            if ($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo "<option value='". $row['idCategoria']."'>". $row['nombre']."</option>";
-                                                }
-                                            }
-                                            $conn->close();
-                                        ?>
+                                        <option value="femenino">Femenino</option>
+                                        <option value="masculino">Masculino</option>
                                     </select>
+                                </div>
+                                <div>
+                                    <label for="usuario" class="label">Usuario:</label>
+                                    <input id="usuario" name="usuario" type="text" class="cuadros" required/>
+                                </div>
+                                <div>
+                                    <label for="password" class="label">Password:</label>
+                                    <input id="password" name="password" type="password" class="cuadros" required/>
                                 </div>
                                 <input type="submit"/>
                             </form>
                         </div>
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
+
             </div>
             <!-- End of Main Content -->
+
         </div>
         <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
+
     <!-- Footer -->
     <?php include '../footer.php';?>
     <!-- End of Footer -->
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -106,7 +131,7 @@
     <script src="/zapatilleate/vendor/jquery/jquery.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/zapatilleate/js/admin/noticias.js"></script>
+    <script src="/zapatilleate/js/admin/usuarios.js"></script>
 </body>
 
 </html>

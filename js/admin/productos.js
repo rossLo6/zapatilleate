@@ -23,12 +23,14 @@ function updateProducto() {
         url: "../../back/admin/actualizarProducto.php",
         type: "post",
         success: function (response) {
-            console.log(response);
             window.location.href = "/zapatilleate/views/admin/producto-detalle.php?id=" + producto_id;
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
 
-    return true;
+    return false;
 }
 
 function crearProducto() {
@@ -48,12 +50,14 @@ function crearProducto() {
         url: "../../back/admin/crearProducto.php",
         type: "post",
         success: function (response) {
-            console.log(response);
             window.location.href = "/zapatilleate/views/admin/productos.php";
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
 
-    return true;
+    return false;
 }
 
 function goToNuevoProducto() {

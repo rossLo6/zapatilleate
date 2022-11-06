@@ -17,7 +17,7 @@ function actualizarUsuario(f) {
     }
 
     //Apellidos
-    var apellidos = document.getElementById("apellido_1").value;
+    var apellidos = document.getElementById("apellidos").value;
     if (!apellidos || apellidos == '') {
         ok = "no";
         msg = msg + "El campo 'Primer apellido' no puede estar vacío.\n"
@@ -55,27 +55,34 @@ function actualizarUsuario(f) {
 
     //Datos de usuario
     var nombre = $('#nombre').val();
-    var apellido1 = $('#apellido_1').val();
-    var apellido2 = $('#apellido_2').val();
+    var apellidos = $('#apellidos').val();
     var email = $('#email').val();
     var fnac = $('#f_nacimiento').val();
     var telefono = $('#telefono').val();
+    var direccion = $('#direccion').val();
+    var sexo = $('#sexo').val();
+    var password = $('#password').val();
 
     $.ajax({
         data: {
             "nombre": nombre,
-            "apellido1": apellido1,
-            "apellido2": apellido2,
+            "apellidos": apellidos,
             "email": email,
             "telefono": telefono,
             "fnac": fnac,
+            "direccion": direccion,
+            "sexo": sexo,
+            "password": password
         },
 
         url: "../back/actualizarUsuario.php",
         type: "post",
         success: function (response) {
-            console.log(response);
+            window.location.href = "/zapatilleate/views/perfil.php";
+        },
+        error: function (response) {
+            alert(response.responseText.split("Error: ")[1]);
         }
     });
-    return true;
+    return false;
 }

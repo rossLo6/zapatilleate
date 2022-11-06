@@ -2,7 +2,7 @@
     include 'Back/bbdd.php';
     //require_once(dirname(__FILE__) . '/zapatilleate/Back/bbdd.php');
 
-    $sql = "SELECT * FROM `noticias` order by fecha DESC limit 5";
+    $sql = "SELECT noticias.*, users_data.nombre as autor, categorias.nombre as categoria  FROM `noticias` INNER JOIN `users_data` on noticias.fk_idUsuario = users_data.idUsuario INNER JOIN `categorias` ON categorias.idCategoria = noticias.fk_idCategoria order by fecha DESC limit 5";
     $result = $conn->query($sql);
 
     $cookie_name = "user_name";
@@ -81,7 +81,7 @@
     </div>
     <!--SECTION NEWS-->
     <section class="section1">
-        <h3 class="style-h3">Nuestras noticias</h3>
+        <h3 class="style-h3">Ultimas noticias</h3>
 
     </section>
     <div id="news-container">
@@ -93,10 +93,11 @@
                 
                     while($row = $result->fetch_assoc()) {
                         echo "<li id='". $row["idNoticia"]."' class='news-item'>";
-                            echo "<h3>". $row["autor"]."</h3>";
-                            echo "<h4><a href='views/news.php?id=". $row["idNoticia"]."'>". $row["titulo"]."</a></h4>";
-                            echo "<div class='image' style='background-image:url(\"". $row["imagen"]."\")'></div>";
-                            echo "<p>". $row["cuerpo"]."</p>";
+                        echo "<h3>". $row["categoria"]."</h3>";
+                        echo "<h4><a href='views/noticia-detalle.php?id=". $row["idNoticia"]."'>". $row["titulo"]."</a></h4>";
+                        echo "<div class='image' style='background-image:url(\"". $row["imagen"]."\")'></div>";
+                        echo "<p>". $row["cuerpo"]."</p>";
+                        echo "<h5>". $row["autor"]."</h5>";
                                 
                         echo "</li>";
                     }

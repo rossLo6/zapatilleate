@@ -17,8 +17,9 @@ function calculatePrice() {
     );
     $("#total").val((amount || 0) + " €");
 }
+
 $(document).ready(function () {
-    $.getJSON("/zapatilleate/back/obtenerPreoducto.php", function (data) {
+    $.getJSON("/zapatilleate/back/obtenerProducto.php", function (data) {
         prices = data;
     });
     $("#elijeProducto")
